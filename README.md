@@ -1,4 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Frontend - Face-recognition Based Attendance Taking System 
+
+## Setup
+First, make sure you have `yarn v1.10.1`(or `npm` if you prefer) and `node v11.10.1` installed.
+
+Run the following bash commands to set up the project:
+```sh
+# clone the project
+git clone https://github.com/QiuHaohao/facial-attendance-frontend.git
+cd facial-attendance-frontend
+# install packages
+yarn install
+# or `npm i` if you use `npm`
+```
+
+To start the development server:
+
+```sh
+yarn start
+# or `npm start` if you use `npm`
+```
 
 ## Available Scripts
 
