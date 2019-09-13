@@ -1,1 +1,1 @@
-export { default } from './ImageCapturer.js'
+export { default } from './ImageCapturer';
