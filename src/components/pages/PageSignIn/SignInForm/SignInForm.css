@@ -3,6 +3,7 @@
   justify-content: center;
 }
 .login-form {
+  min-width: 20vw;
   max-width: 300px;
   margin: 16px;
   flex: 1;
