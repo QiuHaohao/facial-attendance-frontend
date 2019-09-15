@@ -18,7 +18,9 @@ function UserStatusSignedIn() {
   return (
     <div className="user-status user-status-signed-in">
       {`Hi, ${user.userName}! `}
-      <a onClick={showConfirm}>Sign Out.</a>
+      <div className="sign-out" onClick={showConfirm}>
+        Sign Out.
+      </div>
     </div>
   );
 }
