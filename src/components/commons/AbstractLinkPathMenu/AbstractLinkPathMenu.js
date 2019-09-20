@@ -8,7 +8,9 @@ function AbstractLinkPathMenu(props) {
   const { location, items } = props;
   const selectedKeys = _.filter(
     [...items.keys()],
-    key => items[key].path === location.pathname
+    key =>
+      location.pathname.length >= items[key].path.length &&
+      items[key].path === location.pathname.substr(0, items[key].path.length)
   ).map(String);
   return (
     <Menu

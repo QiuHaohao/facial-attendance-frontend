@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 
 import { Button } from 'antd';
 
-import { useSession } from '../../../../hooks/sessionHook';
+import { useSession } from '../../../../../hooks/sessionHook';
 
-import AbstractSelect from '../../../commons/AbstractSelect';
+import AbstractSelect from '../../../../commons/AbstractSelect';
 
 import './LabSelector.css';
 
@@ -26,7 +26,9 @@ function SessionSelector(props) {
       <Button
         type="primary"
         onClick={() => {
-          session.startSession(labSelected);
+          session.startSession(
+            props.labs.filter(lab => lab.lid === labSelected)[0]
+          );
         }}
         disabled={labSelected === null}
       >

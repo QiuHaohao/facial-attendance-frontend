@@ -14,16 +14,17 @@ export const useSession = () => {
 function useProvideSession() {
   const [isOnGoing, setIsOnGoing] = useState(false);
   const [sid, setSid] = useState(null);
+  const [lab, setLab] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [students, setStudents] = useState(null);
-  const [midsOfStudentsPresent, setMidsOfStudentsPresent] = useState(null);
 
-  const handleSuccessfulSessionStart = res => {
+  const handleSuccessfulSessionStart = (labObject, res) => {
     // should store the session ID when starting session
-    setIsOnGoing(true);
     setSid(res.data.sid);
+    setLab(labObject);
     setStartTime(Date.now());
     setStudents(res.data.students);
+    setIsOnGoing(true);
   };
 
   const handleSuccessfulSessionEnd = () => {
@@ -32,13 +33,15 @@ function useProvideSession() {
     setSid(null);
     setStartTime(null);
     setStudents(null);
-    setMidsOfStudentsPresent(null);
   };
 
-  const startSession = lid => {
-    return api.startSession(lid).then(handleSuccessfulSessionStart, () => {
-      message.error('Session Failed to Start!');
-    });
+  const startSession = labObject => {
+    return api.startSession(labObject.lid).then(
+      res => handleSuccessfulSessionStart(labObject, res),
+      () => {
+        message.error('Session Failed to Start!');
+      }
+    );
   };
 
   const endSession = () => {
@@ -47,7 +50,7 @@ function useProvideSession() {
 
   const postImage = ({ base64Image }) => {
     return api.postBase64Image(base64Image).then(res => {
-      setMidsOfStudentsPresent(res.data.mids);
+      setStudents(res.data);
     });
   };
 
@@ -58,9 +61,9 @@ function useProvideSession() {
   return {
     isOnGoing,
     sid,
+    lab,
     startTime,
     students,
-    midsOfStudentsPresent,
     startSession,
     endSession,
     postImage

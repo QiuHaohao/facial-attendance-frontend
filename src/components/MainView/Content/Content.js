@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../../../hooks/userHook';
 
 import PrivateRoute from '../../commons/PrivateRoute';
-import PageNewSession from '../../pages/PageNewSession';
+import PageSession from '../../pages/PageSession';
 import PageLabs from '../../pages/PageLabs';
 import PageSignIn from '../../pages/PageSignIn';
 
@@ -17,9 +17,9 @@ function Content() {
   const renderContent = () => (
     <React.Fragment>
       {renderRedirectToPageSignIn()}
-      <Route path="/home" component={PageNewSession} />
+      <Route path="/session" component={PageSession} />
       <Route path="/labs" component={PageLabs} />
-      <Route exact path="/" component={PageNewSession} />
+      <Route exact path="/" component={PageSession} />
     </React.Fragment>
   );
   return (

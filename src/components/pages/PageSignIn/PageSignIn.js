@@ -12,7 +12,7 @@ import './PageSignIn.css';
 function PageSignIn() {
   const user = useUser();
   const renderRedirectToHome = () =>
-    user.isSignedIn ? <Redirect to="/home" /> : null;
+    user.isSignedIn ? <Redirect to="/session" /> : null;
   return (
     <div className="page-signin">
       {renderRedirectToHome()}
