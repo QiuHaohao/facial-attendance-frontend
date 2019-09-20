@@ -2,7 +2,9 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { useUser } from '../../../hooks/userHook';
-import PageHome from '../../pages/PageHome';
+
+import PrivateRoute from '../../commons/PrivateRoute';
+import PageNewSession from '../../pages/PageNewSession';
 import PageLabs from '../../pages/PageLabs';
 import PageSignIn from '../../pages/PageSignIn';
 
@@ -12,13 +14,22 @@ function Content() {
   const renderRedirectToPageSignIn = () =>
     !user.isSignedIn ? <Redirect to="/signin" /> : null;
 
+  const renderContent = () => (
+    <React.Fragment>
+      {renderRedirectToPageSignIn()}
+      <Route path="/home" component={PageNewSession} />
+      <Route path="/labs" component={PageLabs} />
+      <Route exact path="/" component={PageNewSession} />
+    </React.Fragment>
+  );
   return (
     <div className="content">
-      {renderRedirectToPageSignIn()}
-      <Route exact path="/home" component={PageHome} />
-      <Route exact path="/labs" component={PageLabs} />
       <Route exact path="/signin" component={PageSignIn} />
-      <Route exact path="/" component={() => <div>home</div>} />
+      <PrivateRoute
+        path="/"
+        isSignedIn={user.isSignedIn}
+        component={renderContent}
+      />
     </div>
   );
 }
