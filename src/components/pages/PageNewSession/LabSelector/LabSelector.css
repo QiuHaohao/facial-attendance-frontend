@@ -1,0 +1,17 @@
+.lab-selector {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.lab-selector-text {
+  text-align: center;
+  font-size: 24px;
+}
+
+.lab-selector-dropdown {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
