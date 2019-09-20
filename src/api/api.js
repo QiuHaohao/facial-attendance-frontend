@@ -8,11 +8,13 @@ function postBase64Image(base64Image) {
       image: base64Image
     })
     .then(() => {
-      return {
-        data: {
-          mids: ['U1658131C']
+      return [
+        { mid: 'U1622139C', name: 'Qiu Haoze' },
+        {
+          mid: 'U1658131C',
+          name: 'John Doe Alamak Name Very Damn Freaking Long'
         }
-      };
+      ];
     });
 }
 
@@ -40,6 +42,31 @@ function startSession(lid) {
       data: {
         sid: '1',
         students: [
+          { mid: 'U1622139C', name: 'Qiu Haoze' },
+          {
+            mid: 'U1658131C',
+            name: 'John Doe Alamak Name Very Damn Freaking Long'
+          },
+          { mid: 'U1622139C', name: 'Qiu Haoze' },
+          {
+            mid: 'U1658131C',
+            name: 'John Doe Alamak Name Very Damn Freaking Long'
+          },
+          { mid: 'U1622139C', name: 'Qiu Haoze' },
+          {
+            mid: 'U1658131C',
+            name: 'John Doe Alamak Name Very Damn Freaking Long'
+          },
+          { mid: 'U1622139C', name: 'Qiu Haoze' },
+          {
+            mid: 'U1658131C',
+            name: 'John Doe Alamak Name Very Damn Freaking Long'
+          },
+          { mid: 'U1622139C', name: 'Qiu Haoze' },
+          {
+            mid: 'U1658131C',
+            name: 'John Doe Alamak Name Very Damn Freaking Long'
+          },
           { mid: 'U1622139C', name: 'Qiu Haoze' },
           {
             mid: 'U1658131C',
