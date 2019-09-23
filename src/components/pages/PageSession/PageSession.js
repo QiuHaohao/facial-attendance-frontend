@@ -1,21 +1,39 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { withRouter, Route, Switch } from 'react-router-dom';
+import { withRouter, Switch } from 'react-router-dom';
+
+import { useSession } from '../../../hooks/sessionHook';
+
+import ConditionalRedirectRoute from '../../commons/ConditionalRedirectRoute';
 
 import PageSessionNew from './PageSessionNew';
 import PageSessionOngoing from './PageSessionOngoing';
 
 function PageSession(props) {
+  const session = useSession();
   return (
     <React.Fragment>
       <Switch>
-        <Route path={`${props.match.path}/new`} component={PageSessionNew} />
-        <Route
+        <ConditionalRedirectRoute
+          path={`${props.match.path}/new`}
+          when={session.isOnGoing}
+          to={`${props.match.path}/ongoing`}
+          component={PageSessionNew}
+        />
+        <ConditionalRedirectRoute
           path={`${props.match.path}/ongoing`}
+          when={!session.isOnGoing}
+          to={`${props.match.path}/new`}
           component={PageSessionOngoing}
         />
-        <Route exect path={`${props.match.path}/`} component={PageSessionNew} />
+        <ConditionalRedirectRoute
+          exect
+          path={`${props.match.path}/`}
+          when={session.isOnGoing}
+          to={`${props.match.path}/ongoing`}
+          component={PageSessionNew}
+        />
       </Switch>
     </React.Fragment>
   );

@@ -31,14 +31,6 @@ function useProvideSession() {
     setIsOnGoing(true);
   };
 
-  const handleSuccessfulSessionEnd = () => {
-    // should clear the session ID when starting session
-    setIsOnGoing(false);
-    setSid(null);
-    setStartTime(null);
-    setStudents(null);
-  };
-
   const startSession = labObject => {
     return api.startSession(labObject.lid).then(
       resStartSession => {
@@ -53,7 +45,11 @@ function useProvideSession() {
   };
 
   const endSession = () => {
-    return api.endSession.then(handleSuccessfulSessionEnd);
+    setIsOnGoing(false);
+    setSid(null);
+    setLab(null);
+    setStartTime(null);
+    setStudents(null);
   };
 
   const postImage = ({ base64Image }) => {

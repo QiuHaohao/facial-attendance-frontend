@@ -1,18 +1,30 @@
 import React from 'react';
 
-import { Button, List } from 'antd';
+import { Button, List, Modal } from 'antd';
 
 import SessionDuration from './SessionDuration';
 import ImageCapturer from './ImageCapturer';
 
+import { getDisplayNameFromLab } from '../../../../hooks/userHook';
 import { useSession } from '../../../../hooks/sessionHook';
 
 import Statistic from '../../../commons/Statistic';
+import AttendanceStatusTag from '../../../commons/AttendanceStatusTag';
 
 import './PageSessionOngoing.css';
 
+const { confirm } = Modal;
+
 function PageSessionOngoing() {
   const session = useSession();
+  const showConfirm = () => {
+    confirm({
+      title: 'Do you want to end this session?',
+      okText: 'Yes',
+      cancelText: 'No',
+      onOk: session.endSession
+    });
+  };
   return (
     <div className="page-session-ongoing">
       <div className="session-info">
@@ -21,6 +33,9 @@ function PageSessionOngoing() {
             title="Lab Group"
             value={getDisplayNameFromLab(session.lab)}
           />
+          <Button type="danger" onClick={showConfirm}>
+            End Session
+          </Button>
         </div>
         <List
           className="student-list"

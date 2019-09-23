@@ -2,10 +2,12 @@ import React from 'react';
 import { Modal } from 'antd';
 
 import { useUser } from '../../../../hooks/userHook';
+import { useSession } from '../../../../hooks/sessionHook';
 
 const { confirm } = Modal;
 
 function UserStatusSignedIn() {
+  const session = useSession();
   const user = useUser();
   const showConfirm = () => {
     confirm({
@@ -15,12 +17,15 @@ function UserStatusSignedIn() {
       onOk: user.signOut
     });
   };
+  const logout = (
+    <div className="sign-out" onClick={showConfirm}>
+      Sign Out.
+    </div>
+  );
   return (
     <div className="user-status user-status-signed-in">
       {`Hi, ${user.userName}! `}
-      <div className="sign-out" onClick={showConfirm}>
-        Sign Out.
-      </div>
+      {session.isOnGoing ? null : logout}
     </div>
   );
 }
