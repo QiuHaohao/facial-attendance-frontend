@@ -22,10 +22,6 @@ function useProvideUser() {
     setUserName(res.data.user.username);
     setTid(res.data.user.id);
     setLabs(res.data.user.labs);
-    setLabs([
-      { lid: 'AY19_Sem1_CZ3002_TS4', displayName: 'CZ3002 - TS4' },
-      { lid: 'AY19_Sem1_CZ3002_TS5', displayName: 'CZ3002 - TS5' }
-    ]);
     axios.defaults.headers.common.Authorization = `JWT ${res.data.token}`;
     sessionStorage.setItem('jwtToken', res.data.token);
     setIsSignedIn(true);

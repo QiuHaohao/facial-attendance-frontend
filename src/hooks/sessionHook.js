@@ -18,12 +18,16 @@ function useProvideSession() {
   const [startTime, setStartTime] = useState(null);
   const [students, setStudents] = useState(null);
 
-  const handleSuccessfulSessionStart = (labObject, res) => {
+  const handleSuccessfulSessionStart = (
+    labObject,
+    resStartSession,
+    resStudents
+  ) => {
     // should store the session ID when starting session
-    setSid(res.data.sid);
+    setSid(resStartSession.data.sid);
     setLab(labObject);
     setStartTime(Date.now());
-    setStudents(res.data.students);
+    setStudents(resStudents);
     setIsOnGoing(true);
   };
 
@@ -37,7 +41,11 @@ function useProvideSession() {
 
   const startSession = labObject => {
     return api.startSession(labObject.lid).then(
-      res => handleSuccessfulSessionStart(labObject, res),
+      resStartSession => {
+        api.getStudentsByLid(labObject.lid).then(resStudents => {
+          handleSuccessfulSessionStart(labObject, resStartSession, resStudents);
+        });
+      },
       () => {
         message.error('Session Failed to Start!');
       }

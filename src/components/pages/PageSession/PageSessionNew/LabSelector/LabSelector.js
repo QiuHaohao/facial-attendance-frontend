@@ -13,7 +13,7 @@ function SessionSelector(props) {
   const session = useSession();
   const [labSelected, setLabSelected] = useState(null);
   const options = props.labs.map(lab => {
-    return { value: lab.lid, name: lab.displayName };
+    return { value: lab.lid, name: `${lab.course} - ${lab.group}` };
   });
   return (
     <div className="lab-selector">

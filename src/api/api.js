@@ -18,69 +18,20 @@ function postBase64Image(base64Image) {
     });
 }
 
-function getLabsByTid(tid) {
-  return axios.get(`${config.urlBase + config.pathLab}?instructors=${tid}`);
-}
-
 function getStudentsByLid(lid) {
-  console.log(`getStudentsByLid: ${lid}`);
-  return new Promise(res =>
-    res([
-      { mid: 'U1622139C', name: 'Qiu Haoze' },
-      {
-        mid: 'U1658131C',
-        name: 'John Doe Alamak Name Very Damn Freaking Long'
-      }
-    ])
-  );
+  return axios
+    .get(`${config.urlBase + config.pathStudents}?lab=${lid}`)
+    .then(res =>
+      res.data.map(s => {
+        return { mid: s.matric_num, name: s.name, email: s.email };
+      })
+    );
 }
 
 function startSession(lid) {
-  console.log(`startSession: ${lid}`);
-  return new Promise(res =>
-    res({
-      data: {
-        sid: '1',
-        students: [
-          { mid: 'U1622139C', name: 'Qiu Haoze' },
-          {
-            mid: 'U1658131C',
-            name: 'John Doe Alamak Name Very Damn Freaking Long'
-          },
-          { mid: 'U1622139C', name: 'Qiu Haoze' },
-          {
-            mid: 'U1658131C',
-            name: 'John Doe Alamak Name Very Damn Freaking Long'
-          },
-          { mid: 'U1622139C', name: 'Qiu Haoze' },
-          {
-            mid: 'U1658131C',
-            name: 'John Doe Alamak Name Very Damn Freaking Long'
-          },
-          { mid: 'U1622139C', name: 'Qiu Haoze' },
-          {
-            mid: 'U1658131C',
-            name: 'John Doe Alamak Name Very Damn Freaking Long'
-          },
-          { mid: 'U1622139C', name: 'Qiu Haoze' },
-          {
-            mid: 'U1658131C',
-            name: 'John Doe Alamak Name Very Damn Freaking Long'
-          },
-          { mid: 'U1622139C', name: 'Qiu Haoze' },
-          {
-            mid: 'U1658131C',
-            name: 'John Doe Alamak Name Very Damn Freaking Long'
-          }
-        ]
-      }
-    })
-  );
-}
-
-function endSession(sid) {
-  console.log(`endSession: ${sid}`);
-  return new Promise(res => res({}));
+  return axios.post(config.urlBase + config.pathSession, {
+    lab: lid
+  });
 }
 
 function getToken(username, password) {
@@ -99,9 +50,7 @@ function verifyToken(token) {
 export default {
   postBase64Image,
   getToken,
-  getLabsByTid,
   getStudentsByLid,
   verifyToken,
-  startSession,
-  endSession
+  startSession
 };
