@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { Button } from 'antd';
 
+import { getDisplayNameFromLab } from '../../../../../hooks/userHook';
 import { useSession } from '../../../../../hooks/sessionHook';
 
 import AbstractSelect from '../../../../commons/AbstractSelect';
@@ -13,7 +14,7 @@ function SessionSelector(props) {
   const session = useSession();
   const [labSelected, setLabSelected] = useState(null);
   const options = props.labs.map(lab => {
-    return { value: lab.lid, name: `${lab.course} - ${lab.group}` };
+    return { value: lab.lid, name: getDisplayNameFromLab(lab) };
   });
   return (
     <div className="lab-selector">

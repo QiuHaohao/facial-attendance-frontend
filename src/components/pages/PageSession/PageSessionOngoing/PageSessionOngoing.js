@@ -17,8 +17,10 @@ function PageSessionOngoing() {
     <div className="page-session-ongoing">
       <div className="session-info">
         <div className="session-info-header">
-          <Statistic title="Lab Group" value={session.lab.displayName} />
-          <Button type="danger">End Session</Button>
+          <Statistic
+            title="Lab Group"
+            value={getDisplayNameFromLab(session.lab)}
+          />
         </div>
         <List
           className="student-list"

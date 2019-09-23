@@ -72,6 +72,12 @@ export function ProvideUser({ children }) {
   return <userContext.Provider value={user}>{children}</userContext.Provider>;
 }
 
+// GETTERS
+
+export function getDisplayNameFromLab(lab) {
+  return `${lab.course} - ${lab.group}`;
+}
+
 ProvideUser.propTypes = {
   children: PropTypes.element.isRequired
 };
