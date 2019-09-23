@@ -26,7 +26,7 @@ function PageSessionOngoing() {
           renderItem={student => (
             <List.Item className="student-list-item" key={student.mid}>
               <List.Item.Meta title={student.name} />
-              <div>Attendance Status</div>
+              <AttendanceStatusTag status={student.status} />
             </List.Item>
           )}
         />

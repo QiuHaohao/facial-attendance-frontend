@@ -19,3 +19,7 @@ export function timeDifferenceMilliSecondsToHHMMSS(start, end) {
 export function durationUntilNowMilliSecondsToHHMMSS(start) {
   return timeDifferenceMilliSecondsToHHMMSS(start, Date.now());
 }
+
+export function makeGetterWithDefault(object, defaultValue) {
+  return key => (key in object ? object[key] : defaultValue);
+}
