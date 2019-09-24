@@ -42,7 +42,7 @@ function Content(props) {
       handlePathnameChange(prevPathname, currentPathname);
       setPrevPathname(currentPathname);
     }
-  }, [props.location.pathname, prevPathname]);
+  }, [props.location.pathname, prevPathname, session.isOnGoing]);
 
   const renderContent = () => (
     <React.Fragment>
