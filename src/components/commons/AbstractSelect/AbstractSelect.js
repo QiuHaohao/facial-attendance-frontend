@@ -7,7 +7,7 @@ const { Option } = Select;
 
 function AbstractSelect(props) {
   return (
-    <Select className={props.className} onChange={v => props.onChange(v)}>
+    <Select className={props.className} onChange={console.log(1)}>
       {props.options.map((option, index) => (
         <Option key={index} value={option.value}>
           {option.name}
@@ -16,6 +16,7 @@ function AbstractSelect(props) {
     </Select>
   );
 }
+
 
 AbstractSelect.propTypes = {
   options: PropTypes.array.isRequired,

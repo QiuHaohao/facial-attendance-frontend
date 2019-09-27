@@ -13,10 +13,10 @@ export const useUser = () => {
 };
 
 function useProvideUser() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(true);
   const [userName, setUserName] = useState(null);
   const [tid, setTid] = useState(null);
-  const [labs, setLabs] = useState(null);
+  const [labs, setLabs] = useState(['CZ3007','CZ3005']);
 
   const handleSuccessfulSignIn = res => {
     setUserName(res.data.user.username);
