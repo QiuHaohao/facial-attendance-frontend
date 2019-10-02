@@ -5,17 +5,20 @@ import 'antd/dist/antd.css';
 import './App.css';
 
 import { ProvideUser } from '../../hooks/userHook';
+import { ProvideSession } from '../../hooks/sessionHook';
 
 import MainView from '../MainView';
 
 function App() {
   return (
     <ProvideUser>
-      <Router>
-        <div className="App">
-          <MainView />
-        </div>
-      </Router>
+      <ProvideSession>
+        <Router>
+          <div className="App">
+            <MainView />
+          </div>
+        </Router>
+      </ProvideSession>
     </ProvideUser>
   );
 }

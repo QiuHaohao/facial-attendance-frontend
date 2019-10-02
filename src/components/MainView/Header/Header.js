@@ -4,11 +4,11 @@ import './Header.css';
 import UserStatus from './UserStatus';
 import { useUser } from '../../../hooks/userHook';
 
-import AbstractLinkPathMenu from './AbstractLinkPathMenu';
+import AbstractLinkPathMenu from '../../commons/AbstractLinkPathMenu';
 
 function Header() {
   const menuItemsSignedIn = [
-    { displayName: 'Home', path: '/home' },
+    { displayName: 'Session', path: '/session' },
     { displayName: 'Lab Groups', path: '/labs' }
   ];
   const menuItemsNotSignedIn = [{ displayName: 'Sign in', path: '/signin' }];

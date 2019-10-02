@@ -19,12 +19,12 @@ function useProvideUser() {
   const [labs, setLabs] = useState(null);
 
   const handleSuccessfulSignIn = res => {
-    setIsSignedIn(true);
     setUserName(res.data.user.username);
     setTid(res.data.user.id);
     setLabs(res.data.user.labs);
     axios.defaults.headers.common.Authorization = `JWT ${res.data.token}`;
     sessionStorage.setItem('jwtToken', res.data.token);
+    setIsSignedIn(true);
   };
 
   const verify = ({ token }) => {
@@ -41,6 +41,8 @@ function useProvideUser() {
     setIsSignedIn(false);
     setUserName(null);
     setTid(null);
+    // lid
+    // displayName
     setLabs(null);
     delete axios.defaults.headers.common.Authorization;
     sessionStorage.removeItem('jwtToken');
@@ -68,6 +70,12 @@ function useProvideUser() {
 export function ProvideUser({ children }) {
   const user = useProvideUser();
   return <userContext.Provider value={user}>{children}</userContext.Provider>;
+}
+
+// GETTERS
+
+export function getDisplayNameFromLab(lab) {
+  return `${lab.course} - ${lab.group}`;
 }
 
 ProvideUser.propTypes = {
