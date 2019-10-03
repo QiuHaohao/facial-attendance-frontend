@@ -28,6 +28,47 @@ function getStudentsByLid(lid) {
     );
 }
 
+
+function getSessionsByLid(lid){
+  return axios
+    .get(`${config.urlBase + config.pathSession}?lab=${lid}`)
+    .then(res=>
+      res.data.map(s=> {
+        return { sid: s.session_id, venue: s,venue, time: s.time, date: s.date};
+      }))
+}
+
+function getSessionBySid(sid){
+  return axios
+    .get(`${config.urlBase + config.pathSession}?session=${sid}`)
+    .then(s=>
+      {
+        return { sid: s.session_id, venue: s.venue, time: s.time, date: s.date,students:s.students};
+      })
+}
+//transfer problem for students?
+
+function getStudentByMid(mid){
+  return axios
+  .get(`${config.urlBase + config.pathStudents}?student=${mid}`)
+  .then(s=>
+    {
+      return { mid: s.matric_num, name: s.name, email: s.email, sessions: s.sessions};
+    })
+}
+
+function saveStudentChangesBySid(students,sid){
+  return axios.post(`${config.urlBase + config.pathSession}?session=${sid}`,{
+    students: students
+  })
+} 
+
+function saveStudentChangesByMid(sessions,mid){
+  return axios.post(`${config.urlBase + config.pathStudents}?student=${mid}`,{
+    sessions: sessions
+  })
+}
+
 function startSession(lid) {
   return axios.post(config.urlBase + config.pathSession, {
     lab: lid
@@ -51,6 +92,11 @@ export default {
   postBase64Image,
   getToken,
   getStudentsByLid,
+  getSessionsByLid,
   verifyToken,
-  startSession
+  startSession,
+  getSessionBySid,
+  getStudentByMid,
+  saveStudentChangesBySid,
+  saveStudentChangesByMid,
 };

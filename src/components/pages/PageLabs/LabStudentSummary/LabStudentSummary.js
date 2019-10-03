@@ -7,30 +7,20 @@ function LabStudentSummary(props) {
   const marticNO= props.match.params.id;
   const studentInfo=null;
   const {Option}= Select;
-  //fake data
-  const [sessions,setSessions]=useState([
-      {
-          sessionID: 'PLC',
-          attendance: 'Present',
-          remark: ''
-      },
-      {
-          sessionID: 'PLC',
-          attendance: 'Absent',
-          remark: ''
-      },
-      {
-          sessionID: 'PLC',
-          attendance: 'Absent/valid reason',
-          remark: ''
-      },
-  ]);
 
+  const [sessions, setSessions]=useState(null);
 
+  useEffect(() => {
+      return ()=>{
+          studentInfo=api.getStudentByMid(matricNO);
+          setSessions(studentInfo.students);
+      }
+  }, []);
+  
   const columns =[
       {
           title: 'Session ID',
-          dataIndex: 'sessionID',
+          dataIndex: 'sid',
           key: 'sessionID',
           align:'center'
       },
@@ -65,15 +55,6 @@ function LabStudentSummary(props) {
           align:'center'
       }
   ] 
-  
-    // const [studentss, setStudents]=useState(null);
-
-    // useEffect(() => {
-    //     return ()=>{
-    //         studentInfo=api.getStudentByMid(matricNO);
-    //         setStudents(sessionInfo.students);
-    //     }
-    // }, []);
 
   const changeAttendance=(record,e)=>{
       var tempsessions= sessions;
@@ -94,14 +75,15 @@ function LabStudentSummary(props) {
       }
       setSessions(tempsessions);
   }
+  
   const saveChanges = ()=>{
-    // api.saveStudentChangesByMid(students,matricNO);
+    api.saveStudentChangesByMid(sessions,matricNO);
     console.log("succeeed");
   }
 
  return (
   <div>
-      <EntryInfoDisplayer content={["studentInfo.name",marticNO,"studentInfo.email"]} header={["Name", "Matric No", "Email"]}/>
+      <EntryInfoDisplayer content={[studentInfo.name,marticNO,studentInfo.email]} header={["Name", "Matric No", "Email"]}/>
       <Table 
           columns={columns}
           dataSource={sessions}

@@ -8,31 +8,14 @@ import '../PageLabs.css';
 function LabStudents(props){
     const defaultPath=props.location.pathname;
     const lid= defaultPath.split('/')[2];
-    //fake data
-    const [students,setStudents]=useState(
-        [
-            {
-                name:'PLC',
-                matricno:'PENG0085',
-                email:'peng0085@e.ntu.edu.sg'
 
-            },
-            {
-                name:'PLC',
-                matricno:'PENG0085',
-                email:'peng0085@e.ntu.edu.sg'
-
-            },
-            {
-                name:'PLC',
-                matricno:'PENG0085',
-                email:'peng0085@e.ntu.edu.sg'
-
-            },
-        ]
-        
-    );
-
+    const [students, setStudents]= useState(null);
+    useEffect(() => {
+        return ()=>{
+            const labStudents=api.getStudentsByLid(lid);
+            setStudents(labStudents);
+        }
+    }, [])
     const columns =[
         {
             title: 'Name',
@@ -53,14 +36,6 @@ function LabStudents(props){
             align:'center'
         }
     ]
-
-    // const [students, setStudents]= useState(null);
-    // useEffect(() => {
-    //     return ()=>{
-    //         const labSessions=api.getSessionsByLid();
-    //         setSessions(labSessions);
-    //     }
-    // }, [])
 
     const LinkTo= (id)=>{
         props.history.push(defaultPath+'/'+id);

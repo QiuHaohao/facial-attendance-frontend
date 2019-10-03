@@ -1,5 +1,5 @@
 {
-  "urlBase": "http://127.0.0.1:8000",
+  "urlBase": "http://172.21.148.166:8000",
   "pathSession": "/api/session/",
   "pathLab": "/api/labs/",
   "pathStudents": "/api/students/",

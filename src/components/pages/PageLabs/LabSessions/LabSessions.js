@@ -9,70 +9,14 @@ import '../PageLabs.css';
 function LabSessions(props){
     const defaultPath=props.location.pathname;
     const lid=defaultPath.split("/")[2];
-    //fake data
-    const [sessions,setSessions]=useState(
-        [
-            {
-                sid: '1',
-                venue: 'HWLab1',
-                time: '10:30',
-                date: '25/10/2019'
 
-            },
-            {
-                sid: '2',
-                venue: 'HWLab1',
-                time: '10:30',
-                date: '25/10/2019'
-
-            },
-            {
-                sid: '3',
-                venue: 'HWLab1',
-                time: '10:30',
-                date: '25/10/2019'
-
-            },
-            {
-                sid: '4',
-                venue: 'HWLab1',
-                time: '10:30',
-                date: '25/10/2019'
-
-            },
-            {
-                sid: '5',
-                venue: 'HWLab1',
-                time: '10:30',
-                date: '25/10/2019'
-
-            },
-            {
-                sid: '6',
-                venue: 'HWLab1',
-                time: '10:30',
-                date: '25/10/2019'
-
-            },
-            {
-                sid: '7',
-                venue: 'HWLab1',
-                time: '10:30',
-                date: '25/10/2019'
-
-            },
-        ]
-        
-    );
-    
-
-    // const [sessions, setSessions]= useState(null);
-    // useEffect(() => {
-    //     return ()=>{
-    //         const labSessions=api.getSessionsByLid();
-    //         setSessions(labSessions);
-    //     }
-    // }, [])
+    const [sessions, setSessions]= useState(null);
+    useEffect(() => {
+        return ()=>{
+            const labSessions=api.getSessionsByLid(lid);
+            setSessions(labSessions);
+        }
+    }, [])
     const columns =[
         {
             title: 'SessionID',

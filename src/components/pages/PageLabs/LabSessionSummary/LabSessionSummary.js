@@ -9,27 +9,15 @@ function LabSessionSummary(props) {
     const sessionID= props.match.params.id;
     const sessionInfo=null;
     const {Option}= Select;
-    //fake data
-    const [students,setStudents]=useState([
-        {
-            name: 'PLC',
-            matricno: 'PENG0084',
-            attendance: 'Present',
-            remark: ''
-        },
-        {
-            name: 'PLC',
-            matricno: 'PENG0085',
-            attendance: 'Absent',
-            remark: ''
-        },
-        {
-            name: 'PLC',
-            matricno: 'PENG0086',
-            attendance: 'Absent/valid reason',
-            remark: ''
-        },
-    ]);
+
+    const [students, setStudents]=useState(null);
+
+    useEffect(() => {
+        return ()=>{
+            sessionInfo=api.getSessionBySid(sessionID);
+            setStudents(sessionInfo.students);
+        }
+    }, []);
 
     const columns =[
         {
@@ -40,7 +28,7 @@ function LabSessionSummary(props) {
         },
         {
             title: 'Matric No.',
-            dataIndex: 'matricno',
+            dataIndex: 'mid',
             key: 'matricno',
             align:'center'
         },
@@ -76,19 +64,10 @@ function LabSessionSummary(props) {
         }
     ] 
 
-    // const [students, setStudents]=useState(null);
-
-    // useEffect(() => {
-    //     return ()=>{
-    //         sessionInfo=api.getSessionBySid(sessionID);
-    //         setStudents(sessionInfo.students);
-    //     }
-    // }, []);
-
     const changeAttendance=(record,e)=>{
         var tempstudents= students;
         for (var i=0;i<tempstudents.length;i++){
-            if (tempstudents[i].matricno===record.matricno) 
+            if (tempstudents[i].mid===record.matricno) 
                 tempstudents[i].attendance=e;
                 break;
         }
@@ -98,7 +77,7 @@ function LabSessionSummary(props) {
     const changeRemark= (record,e)=>{
         var tempstudents= students;
         for (var i=0;i<tempstudents.length;i++){
-            if (tempstudents[i].matricno===record.matricno) 
+            if (tempstudents[i].mid===record.matricno) 
                 tempstudents[i].remark=e;
                 break;
         }
@@ -106,13 +85,13 @@ function LabSessionSummary(props) {
     }                                                                                                                                                                     
 
     const saveChanges = ()=>{
-        // api.saveStudentChangesBySid(students,sessionID);
+        api.saveStudentChangesBySid(students,sessionID);
         console.log("succeeed");
     }
 
    return (
     <div>
-        <EntryInfoDisplayer content={[sessionID, "sessionInfo.venue","sessonInfo.time","sessionInfo.date"]} header={["Session ID", "Veunue", "Time", "Date"]}/>
+        <EntryInfoDisplayer content={[sessionID, sessionInfo.venue,sessonInfo.time,sessionInfo.date]} header={["Session ID", "Veunue", "Time", "Date"]}/>
         <Table 
             columns={columns}
             dataSource={students}
