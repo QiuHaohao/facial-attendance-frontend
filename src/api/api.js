@@ -2,20 +2,17 @@ import axios from 'axios';
 
 const config = require('./config.json');
 
-function postBase64Image(base64Image) {
+function postBase64Image(sid, base64Image) {
   return axios
-    .post(config.urlBase + config.pathSession, {
+    .post(config.urlBase + config.pathImage, {
+      sid,
       image: base64Image
     })
-    .then(() => {
-      return [
-        { mid: 'U1622139C', name: 'Qiu Haoze' },
-        {
-          mid: 'U1658131C',
-          name: 'John Doe Alamak Name Very Damn Freaking Long'
-        }
-      ];
-    });
+    .then(res =>
+      res.data.map(item => {
+        return { mid: item.student, status: item.status };
+      })
+    );
 }
 
 function getStudentsByLid(lid) {

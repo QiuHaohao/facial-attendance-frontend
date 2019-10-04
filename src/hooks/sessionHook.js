@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useState, useContext, createContext, useEffect } from 'react';
 
@@ -17,6 +18,15 @@ function useProvideSession() {
   const [lab, setLab] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [students, setStudents] = useState(null);
+
+  const changeStudentStatus = ({ mid, status }, studentList) => {
+    const index = _.findIndex(studentList, { mid });
+    return [
+      ...studentList.slice(0, index),
+      { ...students[index], status },
+      ...studentList.slice(index + 1)
+    ];
+  };
 
   const handleSuccessfulSessionStart = (
     labObject,
@@ -52,9 +62,13 @@ function useProvideSession() {
     setStudents(null);
   };
 
-  const postImage = ({ base64Image }) => {
-    return api.postBase64Image(base64Image).then(res => {
-      setStudents(res.data);
+  const postImage = base64Image => {
+    return api.postBase64Image(sid, base64Image).then(res => {
+      let studentList = students;
+      res.forEach(student => {
+        studentList = changeStudentStatus(student, studentList);
+      });
+      setStudents(studentList);
     });
   };
 

@@ -43,7 +43,7 @@ function PageSessionOngoing() {
           renderItem={student => (
             <List.Item className="student-list-item" key={student.mid}>
               <List.Item.Meta title={student.name} />
-              <AttendanceStatusTag status={student.status} />
+              <AttendanceStatusTag abbreviate status={student.status} />
             </List.Item>
           )}
         />
@@ -53,7 +53,7 @@ function PageSessionOngoing() {
           <div className="live-capture-title">Live Capture</div>
           <SessionDuration />
         </div>
-        <ImageCapturer />
+        <ImageCapturer onPostImage={session.postImage} />
       </div>
     </div>
   );
