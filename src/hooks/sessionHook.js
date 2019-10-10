@@ -28,6 +28,16 @@ function useProvideSession() {
     ];
   };
 
+  const updateStudentStatus = statuses => {
+    let newStudents = students;
+    statuses.forEach(status => {
+      newStudents = changeStudentStatus(status, newStudents);
+    });
+    if (!_.isEqual(newStudents, students)) {
+      setStudents(newStudents);
+    }
+  };
+
   const handleSuccessfulSessionStart = (
     labObject,
     resStartSession,
@@ -63,13 +73,7 @@ function useProvideSession() {
   };
 
   const postImage = base64Image => {
-    return api.postBase64Image(sid, base64Image).then(res => {
-      let studentList = students;
-      res.forEach(student => {
-        studentList = changeStudentStatus(student, studentList);
-      });
-      setStudents(studentList);
-    });
+    return api.postBase64Image(sid, base64Image).then(updateStudentStatus);
   };
 
   useEffect(() => {
