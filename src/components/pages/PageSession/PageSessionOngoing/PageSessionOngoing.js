@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, List, Modal } from 'antd';
+import { Button, Modal } from 'antd';
 
 import SessionDuration from './SessionDuration';
 import ImageCapturer from './ImageCapturer';
@@ -9,13 +9,15 @@ import { getDisplayNameFromLab } from '../../../../hooks/userHook';
 import { useSession } from '../../../../hooks/sessionHook';
 
 import Statistic from '../../../commons/Statistic';
-import AttendanceStatusTag from '../../../commons/AttendanceStatusTag';
+
+import AttendanceList from './AttendanceList';
 
 import './PageSessionOngoing.css';
 
 const { confirm } = Modal;
 
 function PageSessionOngoing() {
+  console.log('PageSessionOngoing');
   const session = useSession();
   const showConfirm = () => {
     confirm({
@@ -37,16 +39,7 @@ function PageSessionOngoing() {
             End Session
           </Button>
         </div>
-        <List
-          className="student-list"
-          dataSource={session.students}
-          renderItem={student => (
-            <List.Item className="student-list-item" key={student.mid}>
-              <List.Item.Meta title={student.name} />
-              <AttendanceStatusTag abbreviate status={student.status} />
-            </List.Item>
-          )}
-        />
+        <AttendanceList students={session.students} />
       </div>
       <div className="live-capture">
         <div className="live-capture-header">
