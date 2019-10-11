@@ -22,7 +22,7 @@ function SessionSelector(props) {
       <AbstractSelect
         className="lab-selector-dropdown"
         options={options}
-        onChange={console.log(1)}
+        onChange={setLabSelected}
       />
       <Button
         type="primary"

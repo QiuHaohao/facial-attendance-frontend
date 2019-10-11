@@ -17,7 +17,6 @@ function AbstractSelect(props) {
   );
 }
 
-
 AbstractSelect.propTypes = {
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
