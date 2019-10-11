@@ -21,7 +21,7 @@ function LabSessionSummary(props) {
       });
       setStudents(res.students);
     });
-  }, []);
+  }, [sessionID]);
   const changeAttendance = (record, e) => {
     const tempstudentsA = students;
     for (let i = 0; i < tempstudentsA.length; i += 1) {

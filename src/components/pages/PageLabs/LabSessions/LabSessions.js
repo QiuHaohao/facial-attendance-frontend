@@ -17,7 +17,7 @@ function LabSessions(props) {
     api.getSessionsByLid(lid).then(res => {
       setSessions(res);
     });
-  }, []);
+  }, [lid]);
 
   const columns = [
     {

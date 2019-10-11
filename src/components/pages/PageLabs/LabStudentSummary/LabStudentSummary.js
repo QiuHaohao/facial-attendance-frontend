@@ -22,11 +22,7 @@ function LabStudentSummary(props) {
         email: res.email
       });
     });
-    return () => {
-      setSessions(null);
-      setStudentInfo(null);
-    };
-  }, []);
+  }, [matricNO]);
   const changeAttendance = (record, e) => {
     const tempsessions = sessions;
     for (let i = 0; i < tempsessions.length; i += 1) {

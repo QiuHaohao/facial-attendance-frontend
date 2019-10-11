@@ -16,7 +16,7 @@ function LabStudents(props) {
     api.getStudentsByLid(lid).then(res => {
       setStudents(res);
     });
-  }, []);
+  }, [lid]);
   const columns = [
     {
       title: 'Name',
@@ -40,7 +40,6 @@ function LabStudents(props) {
 
   const LinkTo = id => {
     props.history.push(`${defaultPath}/${id}`);
-    // tbc
   };
 
   return (
