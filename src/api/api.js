@@ -23,50 +23,9 @@ function getStudentsByLid(lid) {
     .get(`${config.urlBase + config.pathStudents}?lab=${lid}`)
     .then(res =>
       res.data.map(s => {
-        return { mid: s.matric_num, name: s.name, email: s.email };
+        return { mid: s.mid, name: s.name, email: s.email };
       })
     );
-}
-
-
-function getSessionsByLid(lid){
-  return axios
-    .get(`${config.urlBase + config.pathSession}?lab=${lid}`)
-    .then(res=>
-      res.data.map(s=> {
-        return { sid: s.session_id, venue: s,venue, time: s.time, date: s.date};
-      }))
-}
-
-function getSessionBySid(sid){
-  return axios
-    .get(`${config.urlBase + config.pathSession}?session=${sid}`)
-    .then(s=>
-      {
-        return { sid: s.session_id, venue: s.venue, time: s.time, date: s.date,students:s.students};
-      })
-}
-//transfer problem for students?
-
-function getStudentByMid(mid){
-  return axios
-  .get(`${config.urlBase + config.pathStudents}?student=${mid}`)
-  .then(s=>
-    {
-      return { mid: s.matric_num, name: s.name, email: s.email, sessions: s.sessions};
-    })
-}
-
-function saveStudentChangesBySid(students,sid){
-  return axios.post(`${config.urlBase + config.pathSession}?session=${sid}`,{
-    students: students
-  })
-} 
-
-function saveStudentChangesByMid(sessions,mid){
-  return axios.post(`${config.urlBase + config.pathStudents}?student=${mid}`,{
-    sessions: sessions
-  })
 }
 
 function startSession(lid) {
@@ -87,6 +46,57 @@ function verifyToken(token) {
     token
   });
 }
+
+function getSessionsByLid(lid){
+  return axios
+    .get(`${config.urlBase + config.pathSessions+lid}`)
+    .then(res=>
+      res.data.map(s=> {
+        return { sid: s.sid, time: timeInMin(s.session_time), date: date(s.session_time)};
+      }))
+}
+
+function date(dt){
+  return (dt.split('T')[0]);
+}
+
+function timeInMin(dt){
+  let min=dt.split('T')[1].split('.')[0].split(':');
+  return (min[0]+":"+min[1]);
+}
+
+function getSessionBySid(sid){
+  return axios
+    .get(`${config.urlBase + config.pathSession+sid}`)
+    .then(s=>
+      { 
+        return { sid: s.data.sid,time: timeInMin(s.data.time), date: date(s.data.time), students:s.data.students};
+      })
+}
+
+function getStudentByMid(mid){
+  return axios
+  .get(`${config.urlBase + config.pathStudent + mid}`)
+  .then(s=>
+    {
+      return { mid: s.data.mid, name: s.data.name, email: s.data.email, sessions: s.data.sessions};
+    })
+}
+
+
+function saveStudentChangesBySid(students,sid){
+  return axios.post(`${config.urlBase + config.pathAttendanceSession}`,{
+    sid: sid,
+    students: students
+  })
+} 
+
+function saveStudentChangesByMid(sessions,mid){
+  return axios.post(`${config.urlBase + config.pathStudents+mid}`,{
+    sessions: sessions
+  })
+}
+
 
 export default {
   postBase64Image,

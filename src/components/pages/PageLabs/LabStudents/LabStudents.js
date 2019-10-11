@@ -7,14 +7,13 @@ import LabNameHolder from '../LabNameHolder/LabNameHolder';
 import '../PageLabs.css';
 function LabStudents(props){
     const defaultPath=props.location.pathname;
-    const lid= defaultPath.split('/')[2];
+    const lid= defaultPath.split('/')[2][0];
+    const lname=defaultPath.split("/")[2].substr(1,);
 
     const [students, setStudents]= useState(null);
     useEffect(() => {
-        return ()=>{
-            const labStudents=api.getStudentsByLid(lid);
-            setStudents(labStudents);
-        }
+            api.getStudentsByLid(lid)
+             .then(res=>{setStudents(res)});
     }, [])
     const columns =[
         {
@@ -25,8 +24,8 @@ function LabStudents(props){
         },
         {
             title: 'Matric No.',
-            dataIndex: 'matricno',
-            key:'matricno',
+            dataIndex: 'mid',
+            key:'mid',
             align:'center'
         },
         {
@@ -44,7 +43,7 @@ function LabStudents(props){
 
     return (
         <div>
-        <LabNameHolder lname={lid} />
+        <LabNameHolder lname={lname} />
         <Table 
             columns={columns} 
             dataSource={students}
@@ -53,7 +52,7 @@ function LabStudents(props){
             }}
             onRowClick={
                 (record)=>{
-                    LinkTo(record.matricno);
+                    LinkTo(record.mid);
                 }
             }
             style={{backgroundColor:'rgba(255,255,255,0.2)'}}/>

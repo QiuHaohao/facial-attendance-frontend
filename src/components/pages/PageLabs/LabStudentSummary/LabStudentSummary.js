@@ -1,20 +1,29 @@
 import React from 'react';
+import api from '../../../../api/api';
 import {withRouter} from 'react-router-dom';
 import {Table, Select, Input, Button} from 'antd';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import EntryInfoDisplayer from '../EntryInfoDisplayer/EntryInfoDisplayer';
 function LabStudentSummary(props) {
-  const marticNO= props.match.params.id;
-  const studentInfo=null;
+  const matricNO= props.match.params.id;
   const {Option}= Select;
 
   const [sessions, setSessions]=useState(null);
+  const [studentInfo, setStudentInfo]=useState(null);
+
 
   useEffect(() => {
-      return ()=>{
-          studentInfo=api.getStudentByMid(matricNO);
-          setSessions(studentInfo.students);
-      }
+          api.getStudentByMid(matricNO).then(res=>{
+              setSessions(res.sessions);
+              setStudentInfo({
+                  name: res.name,
+                  email: res.email
+              })
+          });
+          return(()=>{
+            setSessions(null);
+            setStudentInfo(null);
+        });
   }, []);
   
   const columns =[
@@ -35,9 +44,10 @@ function LabStudentSummary(props) {
                       onChange={e => changeAttendance(record,e)}
                       style={{width:200}}
                       >
-                      <Option value='Present'>Present</Option>
-                      <Option value='Absent/valid reason'>Absent/valid reason</Option>
-                      <Option value='Absent'>Absent</Option>
+                        <Option value='A'>Attended</Option>
+                        <Option value='L'>Late</Option>
+                        <Option value='AB'>Absence without valid reasons</Option>
+                        <Option value='MC'>Missing with valid reasons</Option>
                   </Select>
                   ),
           align:'center'
@@ -49,7 +59,7 @@ function LabStudentSummary(props) {
           render: (remark,record)=>(
               <Input placeholder='Remarks' 
                   defaultValue={remark}
-                  onChange={e=> changeRemark(record,e)}
+                  onBlur={e=> changeRemark(record,e.target.value)}
                   />
           ),
           align:'center'
@@ -59,7 +69,7 @@ function LabStudentSummary(props) {
   const changeAttendance=(record,e)=>{
       var tempsessions= sessions;
       for (var i=0;i<tempsessions.length;i++){
-          if (tempsessions[i].sessionID===record.sessionID) 
+          if (tempsessions[i].sessionID===record.sid) 
               tempsessions[i].attendance=e;
               break;
       }
@@ -69,7 +79,7 @@ function LabStudentSummary(props) {
   const changeRemark= (record,e)=>{
       var tempsessions= sessions;
       for (var i=0;i<tempsessions.length;i++){
-          if (tempsessions[i].sessionID===record.sessionID) 
+          if (tempsessions[i].sessionID===record.sid) 
               tempsessions[i].remark=e;
               break;
       }
@@ -77,13 +87,12 @@ function LabStudentSummary(props) {
   }
   
   const saveChanges = ()=>{
-    api.saveStudentChangesByMid(sessions,matricNO);
-    console.log("succeeed");
+        api.saveStudentChangesByMid(sessions,matricNO);
   }
 
  return (
   <div>
-      <EntryInfoDisplayer content={[studentInfo.name,marticNO,studentInfo.email]} header={["Name", "Matric No", "Email"]}/>
+      {studentInfo==null?(<div>Loading...</div>):<EntryInfoDisplayer content={[studentInfo.name,matricNO,studentInfo.email]} header={["Name", "Matric No", "Email"]}/>}
       <Table 
           columns={columns}
           dataSource={sessions}

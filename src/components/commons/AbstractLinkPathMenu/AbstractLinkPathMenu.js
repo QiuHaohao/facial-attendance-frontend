@@ -30,8 +30,8 @@ function AbstractLinkPathMenu(props) {
               lab => 
                 (
                   <Menu.Item key={lab} >
-                    <Link to={item.path+'/'+lab}>
-                      {lab}
+                    <Link to={item.path+'/'+lab.lid+lab.course+'-'+lab.group}>
+                      {lab.course+'-'+lab.group}
                     </Link>
                   </Menu.Item>
                 )

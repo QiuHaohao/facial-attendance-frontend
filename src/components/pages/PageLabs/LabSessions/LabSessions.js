@@ -8,26 +8,23 @@ import LabNameHolder from '../LabNameHolder/LabNameHolder';
 import '../PageLabs.css';
 function LabSessions(props){
     const defaultPath=props.location.pathname;
-    const lid=defaultPath.split("/")[2];
-
+    const lid=defaultPath.split("/")[2][0];
+    const lname=defaultPath.split("/")[2].substr(1,);
     const [sessions, setSessions]= useState(null);
+    
+    
     useEffect(() => {
-        return ()=>{
-            const labSessions=api.getSessionsByLid(lid);
-            setSessions(labSessions);
-        }
+            api.getSessionsByLid(lid).then(res=>{setSessions(res)});
+            return(()=>{
+                setSessions(null);
+            })
     }, [])
+
     const columns =[
         {
             title: 'SessionID',
             dataIndex: 'sid',
             key:'sid',
-            align:'center'
-        },
-        {
-            title: 'Venue',
-            dataIndex: 'venue',
-            key:'venue',
             align:'center'
         },
         {
@@ -52,7 +49,7 @@ function LabSessions(props){
     }
     return (
         <div>
-        <LabNameHolder lname={lid}/>
+        <LabNameHolder lname={lname}/>
         <Table 
             columns={columns} 
             dataSource={sessions}
