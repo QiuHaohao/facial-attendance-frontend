@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Webcam from 'react-webcam';
 
 const videoConstraints = {
@@ -19,14 +19,17 @@ function ImageCapturer(props) {
     return () => clearInterval(intervalHandle);
   });
 
-  return (
-    <Webcam
-      className="image-capturer"
-      audio={false}
-      ref={webcamRef}
-      screenshotFormat="image/jpeg"
-      videoConstraints={videoConstraints}
-    />
+  return useMemo(
+    () => (
+      <Webcam
+        className="image-capturer"
+        audio={false}
+        ref={webcamRef}
+        screenshotFormat="image/jpeg"
+        videoConstraints={videoConstraints}
+      />
+    ),
+    []
   );
 }
 
