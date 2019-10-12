@@ -18,11 +18,7 @@ function postBase64Image(sid, base64Image) {
 function getStudentsByLid(lid) {
   return axios
     .get(`${config.urlBase + config.pathStudents}?lab=${lid}`)
-    .then(res =>
-      res.data.map(s => {
-        return { mid: s.matric_num, name: s.name, email: s.email };
-      })
-    );
+    .then(res => res.data);
 }
 
 function startSession(lid) {
