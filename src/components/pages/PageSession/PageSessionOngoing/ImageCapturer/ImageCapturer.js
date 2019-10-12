@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useMemo } from 'react';
 import Webcam from 'react-webcam';
-
-import api from '../../../../../api';
 
 const videoConstraints = {
   width: 1280,
@@ -9,26 +8,33 @@ const videoConstraints = {
   facingMode: 'user'
 };
 
-function ImageCapturer() {
+function ImageCapturer(props) {
   const webcamRef = React.useRef(null);
 
   useEffect(() => {
     const intervalHandle = setInterval(() => {
       const base64Image = webcamRef.current.getScreenshot();
-      api.postBase64Image(base64Image);
-    }, 10000);
+      props.onPostImage(base64Image);
+    }, 1000);
     return () => clearInterval(intervalHandle);
   });
 
-  return (
-    <Webcam
-      className="image-capturer"
-      audio={false}
-      ref={webcamRef}
-      screenshotFormat="image/jpeg"
-      videoConstraints={videoConstraints}
-    />
+  return useMemo(
+    () => (
+      <Webcam
+        className="image-capturer"
+        audio={false}
+        ref={webcamRef}
+        screenshotFormat="image/jpeg"
+        videoConstraints={videoConstraints}
+      />
+    ),
+    []
   );
 }
+
+ImageCapturer.propTypes = {
+  onPostImage: PropTypes.func.isRequired
+};
 
 export default ImageCapturer;

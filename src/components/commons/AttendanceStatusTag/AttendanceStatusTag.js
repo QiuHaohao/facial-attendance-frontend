@@ -22,8 +22,8 @@ const statusAbbrMap = {
 const colorMap = {
   A: 'green',
   L: 'gold',
-  AB: 'blue',
-  MC: 'red'
+  AB: 'red',
+  MC: 'blue'
 };
 
 const getStatusTextMap = makeGetterWithDefault(statusTextMap, 'No status');

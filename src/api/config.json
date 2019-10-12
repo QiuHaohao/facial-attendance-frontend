@@ -1,6 +1,7 @@
 {
-  "urlBase": "http://127.0.0.1:8000",
+  "urlBase": "http://172.21.148.166:8000",
   "pathSession": "/api/session/",
+  "pathImage": "/session/image/",
   "pathLab": "/api/labs/",
   "pathStudents": "/api/students/",
   "pathAuthToken": "/auth/token/",
