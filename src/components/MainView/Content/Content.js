@@ -47,7 +47,7 @@ function Content(props) {
   const renderContent = () => (
     <React.Fragment>
       <Route path="/session" component={PageSession} />
-      <Route path="/labs" component={PageLabs} />
+      <Route path="/labs/:id" component={PageLabs} />
       <Route exact path="/" component={PageSession} />
     </React.Fragment>
   );
