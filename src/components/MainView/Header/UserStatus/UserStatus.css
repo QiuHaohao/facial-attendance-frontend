@@ -1,0 +1,9 @@
+.user-status {
+  color: white;
+}
+
+.sign-out {
+  display: inline;
+  color: #1890ff;
+  cursor: pointer;
+}

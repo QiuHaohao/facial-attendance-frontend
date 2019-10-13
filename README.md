@@ -1,7 +1,7 @@
 # Frontend - Face-recognition Based Attendance Taking System 
 
 ## Setup
-First, make sure you have `yarn v1.10.1`(or `npm` if you prefer) and `node v11.10.1` installed.
+First, make sure you have `node v11.10.1` installed.
 
 Run the following bash commands to set up the project:
 ```sh
@@ -9,15 +9,25 @@ Run the following bash commands to set up the project:
 git clone https://github.com/QiuHaohao/facial-attendance-frontend.git
 cd facial-attendance-frontend
 # install packages
-yarn install
-# or `npm i` if you use `npm`
+npm install
 ```
 
 To start the development server:
 
 ```sh
-yarn start
-# or `npm start` if you use `npm`
+npm start
+```
+
+## Deployment
+Run 
+```sh
+npm run deploy
+``` 
+to build the project locally and upload the static files built to the virtual server `VMadmin@172.21.148.166`.
+
+If you just want to upload the static files built, run
+```sh
+npm run serve
 ```
 
 ## Available Scripts
