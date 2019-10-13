@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Table, Select, Input, Button } from 'antd';
+import { Table, Select, Input, Button, message } from 'antd';
 import React, { useState, useEffect } from 'react';
 import api from '../../../../api/api';
 import EntryInfoDisplayer from '../EntryInfoDisplayer/EntryInfoDisplayer';
@@ -45,7 +45,14 @@ function LabSessionSummary(props) {
   };
 
   const saveChanges = () => {
-    api.saveStudentChangesBySid(students, sessionID);
+    api.saveStudentChangesBySid(students, sessionID).then(
+      () => {
+        message.success('Saved successfully!');
+      },
+      () => {
+        message.error('There was an error, please try again!');
+      }
+    );
   };
 
   const columns = [
