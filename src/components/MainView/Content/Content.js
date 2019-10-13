@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { withRouter, Route } from 'react-router-dom';
 import { message } from 'antd';
 
@@ -51,22 +51,25 @@ function Content(props) {
       <Route exact path="/" component={PageSession} />
     </React.Fragment>
   );
-  return (
-    <div className="content">
-      <ConditionalRedirectRoute
-        exact
-        path="/signin"
-        when={user.isSignedIn}
-        to="/session"
-        component={PageSignIn}
-      />
-      <ConditionalRedirectRoute
-        path="/"
-        when={!user.isSignedIn}
-        to="/signin"
-        component={renderContent}
-      />
-    </div>
+  return useMemo(
+    () => (
+      <div className="content">
+        <ConditionalRedirectRoute
+          exact
+          path="/signin"
+          when={user.isSignedIn}
+          to="/session"
+          component={PageSignIn}
+        />
+        <ConditionalRedirectRoute
+          path="/"
+          when={!user.isSignedIn}
+          to="/signin"
+          component={renderContent}
+        />
+      </div>
+    ),
+    [user.isSignedIn]
   );
 }
 

@@ -13,7 +13,7 @@ export const useUser = () => {
 };
 
 function useProvideUser() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(undefined);
   const [userName, setUserName] = useState(null);
   const [tid, setTid] = useState(null);
   const [labs, setLabs] = useState(null);
@@ -27,8 +27,14 @@ function useProvideUser() {
     setIsSignedIn(true);
   };
 
+  const handleNoToken = () => {
+    setIsSignedIn(false);
+  };
+
   const verify = ({ token }) => {
-    return api.verifyToken(token).then(handleSuccessfulSignIn, () => {});
+    return api.verifyToken(token).then(handleSuccessfulSignIn, () => {
+      setIsSignedIn(false);
+    });
   };
 
   const signIn = ({ username, password }) => {
@@ -49,10 +55,12 @@ function useProvideUser() {
   };
 
   useEffect(() => {
-    if (!isSignedIn) {
+    if (isSignedIn === undefined) {
       const tokenInSessionStorage = sessionStorage.getItem('jwtToken');
       if (tokenInSessionStorage !== null) {
         verify({ token: tokenInSessionStorage });
+      } else {
+        handleNoToken(false);
       }
     }
   });
