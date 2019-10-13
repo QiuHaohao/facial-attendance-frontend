@@ -9,8 +9,8 @@ import '../PageLabs.css';
 
 function LabSessions(props) {
   const defaultPath = props.location.pathname;
-  const lid = defaultPath.split('/')[2][0];
-  const lname = defaultPath.split('/')[2].substr(1);
+  const lid = defaultPath.split('/')[2].split('_')[0];
+  const lname = defaultPath.split('/')[2].split('_')[1];
   const [sessions, setSessions] = useState(null);
 
   useEffect(() => {
