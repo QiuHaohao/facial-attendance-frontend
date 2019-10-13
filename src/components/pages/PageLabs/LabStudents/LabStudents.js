@@ -45,19 +45,23 @@ function LabStudents(props) {
   return (
     <div>
       <LabNameHolder lname={lname} />
-      <Table
-        columns={columns}
-        dataSource={students}
-        pagination={{
-          pageSize: '5',
-          simple: true
-        }}
-        rowKey={record => record.mid}
-        onRowClick={record => {
-          LinkTo(record.mid);
-        }}
-        className="standard-table"
-      />
+      {students == null ? (
+        <div className="loading-table">Loading...</div>
+      ) : (
+        <Table
+          columns={columns}
+          dataSource={students}
+          pagination={{
+            pageSize: 5,
+            simple: true
+          }}
+          rowKey={record => record.mid}
+          onRowClick={record => {
+            LinkTo(record.mid);
+          }}
+          className="standard-table"
+        />
+      )}
     </div>
   );
 }

@@ -24,7 +24,9 @@ function LabSessions(props) {
       title: 'SessionID',
       dataIndex: 'sid',
       key: 'sid',
-      align: 'center'
+      align: 'center',
+      sorter: (a, b) => a.sid - b.sid,
+      defaultSortOrder: 'descend'
     },
     {
       title: 'Time',
@@ -47,19 +49,23 @@ function LabSessions(props) {
   return (
     <div>
       <LabNameHolder lname={lname} />
-      <Table
-        columns={columns}
-        dataSource={sessions}
-        pagination={{
-          pageSize: '5',
-          simple: true
-        }}
-        rowKey={record => record.sid}
-        onRowClick={record => {
-          LinkTo(record.sid);
-        }}
-        className="standard-table"
-      />
+      {sessions == null ? (
+        <div className="loading-table">Loading...</div>
+      ) : (
+        <Table
+          columns={columns}
+          dataSource={sessions}
+          pagination={{
+            pageSize: 5,
+            simple: true
+          }}
+          rowKey={record => record.sid}
+          onRowClick={record => {
+            LinkTo(record.sid);
+          }}
+          className="standard-table"
+        />
+      )}
     </div>
   );
 }

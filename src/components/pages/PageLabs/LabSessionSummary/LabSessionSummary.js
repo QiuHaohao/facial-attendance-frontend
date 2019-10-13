@@ -100,19 +100,25 @@ function LabSessionSummary(props) {
           header={['Session ID', 'Date', 'Time']}
         />
       )}
-      <Table
-        columns={columns}
-        dataSource={students}
-        pagination={{
-          pageSize: '5',
-          simple: true
-        }}
-        rowKey={record => record.mid}
-        className="standard-table"
-      />
-      <Button onClick={saveChanges} className="lab-save-button">
-        Save
-      </Button>
+      {students == null ? (
+        <div className="loading-table">Loading...</div>
+      ) : (
+        <div>
+          <Table
+            columns={columns}
+            dataSource={students}
+            pagination={{
+              pageSize: 5,
+              simple: true
+            }}
+            rowKey={record => record.mid}
+            className="standard-table"
+          />
+          <Button onClick={saveChanges} className="lab-save-button">
+            Save
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

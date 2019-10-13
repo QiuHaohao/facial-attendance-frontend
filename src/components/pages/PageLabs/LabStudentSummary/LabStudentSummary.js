@@ -26,8 +26,7 @@ function LabStudentSummary(props) {
   const changeAttendance = (record, e) => {
     const tempsessions = sessions;
     for (let i = 0; i < tempsessions.length; i += 1) {
-      if (tempsessions[i].sessionID === record.sid)
-        tempsessions[i].attendance = e;
+      if (tempsessions[i].sid === record.sid) tempsessions[i].attendance = e;
       break;
     }
     setSessions(tempsessions);
@@ -36,7 +35,7 @@ function LabStudentSummary(props) {
   const changeRemark = (record, e) => {
     const tempsessions = sessions;
     for (let i = 0; i < tempsessions.length; i += 1) {
-      if (tempsessions[i].sessionID === record.sid) tempsessions[i].remark = e;
+      if (tempsessions[i].sid === record.sid) tempsessions[i].remark = e;
       break;
     }
     setSessions(tempsessions);
@@ -51,7 +50,9 @@ function LabStudentSummary(props) {
       title: 'Session ID',
       dataIndex: 'sid',
       key: 'sessionID',
-      align: 'center'
+      align: 'center',
+      sorter: (a, b) => a.sid - b.sid,
+      defaultSortOrder: 'descend'
     },
     {
       title: 'Attendance',
@@ -96,19 +97,25 @@ function LabStudentSummary(props) {
           header={['Name', 'Matric No', 'Email']}
         />
       )}
-      <Table
-        columns={columns}
-        dataSource={sessions}
-        pageination={{
-          pageSize: '5',
-          simple: true
-        }}
-        rowKey={record => record.sid}
-        className="standard-table"
-      />
-      <Button onClick={saveChanges} className="lab-save-button">
-        Save
-      </Button>
+      {sessions == null ? (
+        <div className="loading-table">Loading...</div>
+      ) : (
+        <div>
+          <Table
+            columns={columns}
+            dataSource={sessions}
+            pageination={{
+              pageSize: 5,
+              simple: true
+            }}
+            rowKey={record => record.sid}
+            className="standard-table"
+          />
+          <Button onClick={saveChanges} className="lab-save-button">
+            Save
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
