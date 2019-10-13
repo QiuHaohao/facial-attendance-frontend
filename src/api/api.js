@@ -59,15 +59,17 @@ function timeInMin(dt) {
   return `${min[0]}:${min[1]}`;
 }
 function getSessionsByLid(lid) {
-  return axios.get(`${config.urlBase + config.pathSessions + lid}`).then(res =>
-    res.data.map(s => {
-      return {
-        sid: s.sid,
-        time: timeInMin(s.session_time),
-        date: date(s.session_time)
-      };
-    })
-  );
+  return axios
+    .get(`${config.urlBase + config.pathSessions}?lab=${lid}`)
+    .then(res =>
+      res.data.map(s => {
+        return {
+          sid: s.sid,
+          time: timeInMin(s.session_time),
+          date: date(s.session_time)
+        };
+      })
+    );
 }
 
 function getSessionBySid(sid) {
@@ -100,7 +102,8 @@ function saveStudentChangesBySid(students, sid) {
 }
 
 function saveStudentChangesByMid(sessions, mid) {
-  return axios.post(`${config.urlBase + config.pathStudents + mid}`, {
+  return axios.post(`${config.urlBase + config.pathAttendanceStudent}`, {
+    mid,
     sessions
   });
 }

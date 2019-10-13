@@ -104,7 +104,7 @@ function LabSessionSummary(props) {
         columns={columns}
         dataSource={students}
         pagination={{
-          pageSize: '5',
+          pageSize: 5,
           simple: true
         }}
         rowKey={record => record.mid}

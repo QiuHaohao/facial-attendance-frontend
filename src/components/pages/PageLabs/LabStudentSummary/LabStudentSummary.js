@@ -26,8 +26,7 @@ function LabStudentSummary(props) {
   const changeAttendance = (record, e) => {
     const tempsessions = sessions;
     for (let i = 0; i < tempsessions.length; i += 1) {
-      if (tempsessions[i].sessionID === record.sid)
-        tempsessions[i].attendance = e;
+      if (tempsessions[i].sid === record.sid) tempsessions[i].attendance = e;
       break;
     }
     setSessions(tempsessions);
@@ -36,7 +35,7 @@ function LabStudentSummary(props) {
   const changeRemark = (record, e) => {
     const tempsessions = sessions;
     for (let i = 0; i < tempsessions.length; i += 1) {
-      if (tempsessions[i].sessionID === record.sid) tempsessions[i].remark = e;
+      if (tempsessions[i].sid === record.sid) tempsessions[i].remark = e;
       break;
     }
     setSessions(tempsessions);
@@ -100,7 +99,7 @@ function LabStudentSummary(props) {
         columns={columns}
         dataSource={sessions}
         pageination={{
-          pageSize: '5',
+          pageSize: 5,
           simple: true
         }}
         rowKey={record => record.sid}

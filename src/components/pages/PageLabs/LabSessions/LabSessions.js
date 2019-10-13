@@ -24,7 +24,9 @@ function LabSessions(props) {
       title: 'SessionID',
       dataIndex: 'sid',
       key: 'sid',
-      align: 'center'
+      align: 'center',
+      sorter: (a, b) => a.sid - b.sid,
+      defaultSortOrder: 'descend'
     },
     {
       title: 'Time',
@@ -51,7 +53,7 @@ function LabSessions(props) {
         columns={columns}
         dataSource={sessions}
         pagination={{
-          pageSize: '5',
+          pageSize: 5,
           simple: true
         }}
         rowKey={record => record.sid}
