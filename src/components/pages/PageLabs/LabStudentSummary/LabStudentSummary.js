@@ -50,7 +50,9 @@ function LabStudentSummary(props) {
       title: 'Session ID',
       dataIndex: 'sid',
       key: 'sessionID',
-      align: 'center'
+      align: 'center',
+      sorter: (a, b) => a.sid - b.sid,
+      defaultSortOrder: 'descend'
     },
     {
       title: 'Attendance',
