@@ -29,7 +29,9 @@ function AbstractLinkPathMenu(props) {
               {user.labs.map(lab => (
                 <Menu.Item key={`sub${lab.lid}`}>
                   <Link
-                    to={`${item.path}/${lab.lid}${lab.course}-${lab.group}`}
+                    to={`${item.path}/${`${lab.lid}_`}${lab.course}-${
+                      lab.group
+                    }`}
                   >
                     {`${lab.course}-${lab.group}`}
                   </Link>

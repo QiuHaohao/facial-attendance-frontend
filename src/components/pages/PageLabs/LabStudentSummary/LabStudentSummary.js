@@ -26,8 +26,10 @@ function LabStudentSummary(props) {
   const changeAttendance = (record, e) => {
     const tempsessions = sessions;
     for (let i = 0; i < tempsessions.length; i += 1) {
-      if (tempsessions[i].sid === record.sid) tempsessions[i].attendance = e;
-      break;
+      if (tempsessions[i].sid === record.sid) {
+        tempsessions[i].attendance = e;
+        break;
+      }
     }
     setSessions(tempsessions);
   };
@@ -35,8 +37,10 @@ function LabStudentSummary(props) {
   const changeRemark = (record, e) => {
     const tempsessions = sessions;
     for (let i = 0; i < tempsessions.length; i += 1) {
-      if (tempsessions[i].sid === record.sid) tempsessions[i].remark = e;
-      break;
+      if (tempsessions[i].sid === record.sid) {
+        tempsessions[i].remark = e;
+        break;
+      }
     }
     setSessions(tempsessions);
   };
