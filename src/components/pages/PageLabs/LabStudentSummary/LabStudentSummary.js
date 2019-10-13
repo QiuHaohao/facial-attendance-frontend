@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Table, Select, Input, Button } from 'antd';
+import { Table, Select, Input, Button, message } from 'antd';
 import api from '../../../../api/api';
 
 import EntryInfoDisplayer from '../EntryInfoDisplayer/EntryInfoDisplayer';
@@ -46,7 +46,14 @@ function LabStudentSummary(props) {
   };
 
   const saveChanges = () => {
-    api.saveStudentChangesByMid(sessions, matricNO);
+    api.saveStudentChangesByMid(sessions, matricNO).then(
+      () => {
+        message.success('Saved successfully!');
+      },
+      () => {
+        message.error('There was an error, please try again!');
+      }
+    );
   };
 
   const columns = [
