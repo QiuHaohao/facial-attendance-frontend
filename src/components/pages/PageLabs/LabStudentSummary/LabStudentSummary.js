@@ -95,19 +95,25 @@ function LabStudentSummary(props) {
           header={['Name', 'Matric No', 'Email']}
         />
       )}
-      <Table
-        columns={columns}
-        dataSource={sessions}
-        pageination={{
-          pageSize: 5,
-          simple: true
-        }}
-        rowKey={record => record.sid}
-        className="standard-table"
-      />
-      <Button onClick={saveChanges} className="lab-save-button">
-        Save
-      </Button>
+      {sessions == null ? (
+        <div className="loading-table">Loading...</div>
+      ) : (
+        <div>
+          <Table
+            columns={columns}
+            dataSource={sessions}
+            pageination={{
+              pageSize: 5,
+              simple: true
+            }}
+            rowKey={record => record.sid}
+            className="standard-table"
+          />
+          <Button onClick={saveChanges} className="lab-save-button">
+            Save
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
