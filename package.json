@@ -21,7 +21,8 @@
     "test": "CI=true react-scripts test --env=jsdom",
     "test:coverage": "npm test -- --coverage",
     "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.{js,jsx}'"
+    "lint": "eslint './src/**/*.{js,jsx}'",
+    "generate-tests": "node scripts/generate-tests.js"
   },
   "eslintConfig": {
     "extends": "react-app"
