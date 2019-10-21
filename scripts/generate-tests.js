@@ -3,16 +3,16 @@ const path = require('path');
 
 const PATH_COMPONENTS = './src/components';
 
-const test = folderName => `
-import React from 'react';
-import ReactDOM from 'react-dom';
+const test = folderName => `import React from 'react';
+import { mount } from 'enzyme';
 import ${folderName} from './${folderName}';
 
 // eslint-disable-next-line no-undef
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<${folderName} />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('${folderName} component', () => {
+  // eslint-disable-next-line no-undef
+  test('renders without crashing', () => {
+    mount(<${folderName} />);
+  });
 });
 `;
 
@@ -30,6 +30,7 @@ function addTestFile(pathFolder) {
   const testString = test(folderName);
   const pathTestFile = path.join(pathFolder, `${folderName}.test.js`);
   fs.writeFileSync(pathTestFile, testString);
+  // fs.unlinkSync(pathTestFile);
 }
 
 function shouldAddTestFile(pathFolder) {

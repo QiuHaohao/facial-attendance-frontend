@@ -1,11 +1,19 @@
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { mount } from 'enzyme';
 import AbstractSelect from './AbstractSelect';
 
 // eslint-disable-next-line no-undef
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<AbstractSelect />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('AbstractSelect component', () => {
+  // eslint-disable-next-line no-undef
+  test('renders without crashing', () => {
+    mount(
+      <AbstractSelect
+        options={[
+          { value: 'lid1', name: 'Lab 1' },
+          { value: 'lid1', name: 'Lab 1' }
+        ]}
+        onChange={() => {}}
+      />
+    );
+  });
 });

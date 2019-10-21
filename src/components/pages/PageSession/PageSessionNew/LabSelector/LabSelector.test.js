@@ -1,11 +1,18 @@
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { mount } from 'enzyme';
 import LabSelector from './LabSelector';
 
 // eslint-disable-next-line no-undef
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<LabSelector />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('LabSelector component', () => {
+  // eslint-disable-next-line no-undef
+  test('renders without crashing', () => {
+    mount(
+      <LabSelector
+        labs={[
+          { lid: 1, course: 'CZ3002', group: 'TS5' },
+          { lid: 2, course: 'CZ3002', group: 'TS4' }
+        ]}
+      />
+    );
+  });
 });

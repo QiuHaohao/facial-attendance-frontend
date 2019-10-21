@@ -1,11 +1,11 @@
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { mount } from 'enzyme';
 import PageSignIn from './PageSignIn';
 
 // eslint-disable-next-line no-undef
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<PageSignIn />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('PageSignIn component', () => {
+  // eslint-disable-next-line no-undef
+  test('renders without crashing', () => {
+    mount(<PageSignIn />);
+  });
 });
