@@ -1,7 +1,7 @@
 # Frontend - Face-recognition Based Attendance Taking System 
 
 ## Setup
-First, make sure you have `node v11.10.1` installed.
+First, make sure you have `node v11.10.1` and `npm v6.7.0` installed.
 
 Run the following bash commands to set up the project:
 ```sh
@@ -17,6 +17,8 @@ To start the development server:
 ```sh
 npm start
 ```
+
+Once the server is started, the client Web App will be accessible at `http://localhost:3000`.
 
 ### Configuring Server
 By default, the URL of the backend server is `172.21.148.166:8000`, our school server, which can only be accessed in university network. It can be configured by changing `urlBase` attribute of `src/api/config.json`. For example, to connect to the backend server running at `localhost:8000`, change `urlBase` attribute of `src/api/config.json` as follows:
