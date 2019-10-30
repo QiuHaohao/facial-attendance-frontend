@@ -18,7 +18,7 @@ To start the development server:
 npm start
 ```
 
-## Configuring Server
+### Configuring Server
 By default, the URL of the backend server is `172.21.148.166:8000`, our school server, which can only be accessed in university network. It can be configured by changing `urlBase` attribute of `src/api/config.json`. For example, to connect to the backend server running at `localhost:8000`, change `urlBase` attribute of `src/api/config.json` as follows:
 
 ```
