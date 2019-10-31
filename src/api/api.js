@@ -101,6 +101,10 @@ function saveStudentChangesByMid(sessions, mid) {
   });
 }
 
+function addNewStudent(student) {
+  return axios.post(`${config.urlBase + config.pathStudents}`, student);
+}
+
 export default {
   postBase64Image,
   getToken,
@@ -111,5 +115,6 @@ export default {
   getSessionBySid,
   getStudentByMid,
   saveStudentChangesBySid,
-  saveStudentChangesByMid
+  saveStudentChangesByMid,
+  addNewStudent
 };

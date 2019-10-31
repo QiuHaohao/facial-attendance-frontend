@@ -9,7 +9,8 @@ import AbstractLinkPathMenu from '../../commons/AbstractLinkPathMenu';
 function Header() {
   const menuItemsSignedIn = [
     { displayName: 'Session', path: '/session' },
-    { displayName: 'Lab Groups', path: '/labs' }
+    { displayName: 'Lab Groups', path: '/labs' },
+    { displayName: 'Add Student', path: '/student' }
   ];
   const menuItemsNotSignedIn = [{ displayName: 'Sign in', path: '/signin' }];
   const user = useUser();
