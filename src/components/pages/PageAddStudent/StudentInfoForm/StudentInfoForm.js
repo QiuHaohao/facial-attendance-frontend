@@ -15,7 +15,6 @@ function getBase64(img, callback) {
 function StudentInfoForm(props) {
   const { getFieldDecorator } = props.form;
   const { Option } = Select;
-  // const []
   const user = userHook.useUser();
   const [imageUrl, setImageUrl] = useState(undefined);
 
@@ -56,6 +55,8 @@ function StudentInfoForm(props) {
               message.error('Upload Failed!');
             });
           message.success('Student added!');
+          props.form.resetFields();
+          setImageUrl(undefined);
         } else {
           message.destroy();
           message.warning('Please select a photo!');
@@ -148,7 +149,8 @@ function StudentInfoForm(props) {
 StudentInfoForm.propTypes = {
   form: PropTypes.shape({
     getFieldDecorator: PropTypes.func.isRequired,
-    validateFields: PropTypes.func.isRequired
+    validateFields: PropTypes.func.isRequired,
+    resetFields: PropTypes.func.isRequired
   })
 };
 
