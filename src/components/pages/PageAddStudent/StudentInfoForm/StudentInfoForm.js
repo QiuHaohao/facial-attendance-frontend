@@ -53,10 +53,9 @@ function StudentInfoForm(props) {
           api.addNewStudent(finalValue).then(() => {
             message.destroy();
             message.success('Student added!');
-                props.form.resetFields();
-                setImageUrl(undefined);
+            props.form.resetFields();
+            setImageUrl(undefined);
           }, showErrorMsg);
-
         } else {
           message.destroy();
           message.warning('Please select a photo!');

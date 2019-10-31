@@ -105,14 +105,6 @@ function addNewStudent(student) {
   return axios.post(`${config.urlBase + config.pathStudents}`, student);
 }
 
-function addStudentPhoto(base64Image) {
-  return axios
-    .post(config.urlBase + config.pathImage, {
-      image: base64Image
-    })
-    .then(res => {});
-}
-
 export default {
   postBase64Image,
   getToken,
@@ -124,6 +116,5 @@ export default {
   getStudentByMid,
   saveStudentChangesBySid,
   saveStudentChangesByMid,
-  addNewStudent,
-  addStudentPhoto
+  addNewStudent
 };
