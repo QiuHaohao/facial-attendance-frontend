@@ -38,25 +38,25 @@ function StudentInfoForm(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const showErrorMsg = res => {
+      message.destroy();
+      message.error(res.response.data[Object.keys(res.response.data)[0]]);
+    };
     props.form.validateFields((err, values) => {
       if (!err) {
         if (imageUrl !== undefined) {
-          // submit base64 photo
-          message.loading('Adding Student...');
-          api
-            .addNewStudent(values)
-            .then(() => {
-              message.destroy();
-              message.loading('Uploading Photo...');
-              api.addStudentPhoto();
-            })
-            .catch(() => {
-              message.destroy();
-              message.error('Upload Failed!');
-            });
-          message.success('Student added!');
-          props.form.resetFields();
-          setImageUrl(undefined);
+          const finalValue = {
+            ...values,
+            image: imageUrl
+          };
+          message.loading('Adding Student...', 99999);
+          api.addNewStudent(finalValue).then(() => {
+            message.destroy();
+            message.success('Student added!');
+                props.form.resetFields();
+                setImageUrl(undefined);
+          }, showErrorMsg);
+
         } else {
           message.destroy();
           message.warning('Please select a photo!');
@@ -67,11 +67,7 @@ function StudentInfoForm(props) {
 
   return (
     <div className="student-info-form-container">
-      <Form
-        onSubmit={handleSubmit}
-        enctype="text/plain"
-        className="student-info-form"
-      >
+      <Form onSubmit={handleSubmit} className="student-info-form">
         <Form.Item label="Matric No">
           {getFieldDecorator('mid', {
             rules: [
