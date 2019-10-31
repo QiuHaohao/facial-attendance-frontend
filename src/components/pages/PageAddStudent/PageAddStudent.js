@@ -1,9 +1,11 @@
 import React from 'react';
 import StudentInfoForm from './StudentInfoForm/StudentInfoForm';
 
+import './PageAddStudent.css';
+
 function PageAddStudent() {
   return (
-    <div>
+    <div className="page-add-student">
       <StudentInfoForm />
     </div>
   );

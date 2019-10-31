@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as userHook from '../../../../hooks/userHook';
 import api from '../../../../api/api';
 
+import './StudentInfoForm.css';
 function StudentInfoForm(props) {
   const { getFieldDecorator } = props.form;
   const { Option } = Select;
@@ -37,8 +38,12 @@ function StudentInfoForm(props) {
   //   return e && e.fileList;
   // };
   return (
-    <div>
-      <Form onSubmit={handleSubmit} enctype="text/plain">
+    <div className="student-info-form-container">
+      <Form
+        onSubmit={handleSubmit}
+        enctype="text/plain"
+        className="student-info-form"
+      >
         <Form.Item label="Matric No">
           {getFieldDecorator('mid', {
             rules: [
