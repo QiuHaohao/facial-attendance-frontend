@@ -100,14 +100,17 @@ function saveStudentChangesByMid(sessions, mid) {
     sessions
   });
 }
-function addNewStudent(formdata) {
-  return axios.post(
-    `${config.urlBase + config.pathStudents}`,
-    formdata
-    // , {
-    //   headers: { 'Content-Type': 'text/plain' }
-    // }
-  );
+
+function addNewStudent(student) {
+  return axios.post(`${config.urlBase + config.pathStudents}`, student);
+}
+
+function addStudentPhoto(base64Image) {
+  return axios
+    .post(config.urlBase + config.pathImage, {
+      image: base64Image
+    })
+    .then(res => {});
 }
 
 export default {
@@ -121,5 +124,6 @@ export default {
   getStudentByMid,
   saveStudentChangesBySid,
   saveStudentChangesByMid,
-  addNewStudent
+  addNewStudent,
+  addStudentPhoto
 };

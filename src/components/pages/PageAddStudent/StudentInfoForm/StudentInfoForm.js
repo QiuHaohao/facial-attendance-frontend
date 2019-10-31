@@ -1,42 +1,69 @@
-import React from 'react';
-import { Form, Button, Select, Input, Upload, Icon } from 'antd';
+import React, { useState } from 'react';
+import { Form, Button, Select, Input, Upload, message } from 'antd';
 import PropTypes from 'prop-types';
 import * as userHook from '../../../../hooks/userHook';
 import api from '../../../../api/api';
 
 import './StudentInfoForm.css';
+
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
 function StudentInfoForm(props) {
   const { getFieldDecorator } = props.form;
   const { Option } = Select;
   // const []
   const user = userHook.useUser();
+  const [imageUrl, setImageUrl] = useState(undefined);
+
+  const uploadButton = (
+    <div>
+      <div className="ant-upload-text">Upload</div>
+    </div>
+  );
+
+  function beforeUpload(file) {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        if (values.photo !== undefined) {
-          const formdata = new FormData();
-          formdata.append('mid', values.mid);
-          formdata.append('name', values.name);
-          formdata.append('email', values.email);
-          for (let i = 0; i < values.labs.length; i += 1) {
-            formdata.append('labs', values.labs[i]);
-          }
-          formdata.append('image', values.photo);
-          api.addNewStudent(formdata);
+        if (imageUrl !== undefined) {
+          // submit base64 photo
+          message.loading('Adding Student...');
+          api
+            .addNewStudent(values)
+            .then(() => {
+              message.destroy();
+              message.loading('Uploading Photo...');
+              api.addStudentPhoto();
+            })
+            .catch(() => {
+              message.destroy();
+              message.error('Upload Failed!');
+            });
+          message.success('Student added!');
+        } else {
+          message.destroy();
+          message.warning('Please select a photo!');
         }
       }
     });
   };
 
-  // const normFile = e => {
-  //   console.log(`UploadEvent${  e}`);
-  //   if (Array.isArray(e)) {
-  //     return null;
-  //   }
-  //   return e && e.fileList;
-  // };
   return (
     <div className="student-info-form-container">
       <Form
@@ -89,15 +116,24 @@ function StudentInfoForm(props) {
           )}
         </Form.Item>
         <Form.Item label="Photo">
-          {getFieldDecorator('photo')(
-            // <Upload {...uploadProps} name="photo" listType="picture">
-            //   <Button>
-            //     <Icon type="upload" />
-            //     Click to upload
-            //   </Button>
-            // </Upload>
-            <Input type="file" />
-          )}
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            beforeUpload={beforeUpload}
+            onChange={info =>
+              getBase64(info.file.originFileObj, imgUrl => {
+                setImageUrl(imgUrl);
+              })
+            }
+          >
+            {imageUrl ? (
+              <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
