@@ -52,7 +52,7 @@ function LabStudents(props) {
           columns={columns}
           dataSource={students}
           pagination={{
-            pageSize: 5,
+            pageSize: 6,
             simple: true
           }}
           rowKey={record => record.mid}
