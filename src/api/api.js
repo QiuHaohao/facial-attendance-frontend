@@ -27,6 +27,14 @@ function startSession(lid) {
   });
 }
 
+function endSession(sid) {
+  console.log(sid);
+  console.log(config.urlBase + config.pathEndSession);
+  return axios.post(config.urlBase + config.pathEndSession, {
+    sid
+  });
+}
+
 function getToken(username, password) {
   return axios.post(`${config.urlBase + config.pathAuthToken}`, {
     username,
@@ -112,6 +120,7 @@ export default {
   getSessionsByLid,
   verifyToken,
   startSession,
+  endSession,
   getSessionBySid,
   getStudentByMid,
   saveStudentChangesBySid,
