@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import EntryInfoDisplayer from './EntryInfoDisplayer';
 
 // eslint-disable-next-line no-undef
-describe('AbstractSelect component', () => {
+describe('EntryInfoDisplayer component', () => {
   // eslint-disable-next-line no-undef
   test('renders without crashing', () => {
     mount(

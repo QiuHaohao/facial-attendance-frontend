@@ -48,7 +48,7 @@ function LabSessions(props) {
   };
   return (
     <div>
-      <LabNameHolder lname={lname} />
+      <LabNameHolder lname={lname === undefined ? 'CZ3007' : lname} />
       {sessions == null ? (
         <div className="loading-table">Loading...</div>
       ) : (
