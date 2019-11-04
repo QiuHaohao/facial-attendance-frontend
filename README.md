@@ -30,6 +30,9 @@ By default, the URL of the backend server is `172.21.148.166:8000`, our school s
 }
 ```
 
+### Sign in
+Authentication credentials can only be added through backend's django admin module. Please refer to [this document](https://github.com/QiuHaohao/facial-attendance-backend/blob/develop/README.md#setup) for more detail.
+
 ## Deployment
 Run 
 ```sh
