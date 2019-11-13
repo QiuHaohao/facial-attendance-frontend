@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Table } from 'antd';
 import api from '../../../../api/api';
@@ -71,4 +70,4 @@ LabStudents.propTypes = {
   location: PropTypes.object.isRequired
 };
 
-export default withRouter(LabStudents);
+export default LabStudents;

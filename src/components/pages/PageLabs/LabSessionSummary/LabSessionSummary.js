@@ -1,5 +1,4 @@
 /* eslint-disable react/display-name */
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Table, Select, Input, Button, message } from 'antd';
 import React, { useState, useEffect } from 'react';
@@ -138,4 +137,4 @@ LabSessionSummary.propTypes = {
   match: PropTypes.object.isRequired
 };
 
-export default withRouter(LabSessionSummary);
+export default LabSessionSummary;
