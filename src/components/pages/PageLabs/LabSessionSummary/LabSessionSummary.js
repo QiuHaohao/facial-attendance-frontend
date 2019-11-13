@@ -103,7 +103,7 @@ function LabSessionSummary(props) {
   return (
     <div>
       {sessionInfo == null ? (
-        <div>Loading...</div>
+        <div className="loading">Loading...</div>
       ) : (
         <EntryInfoDisplayer
           content={[sessionID, sessionInfo.date, sessionInfo.time]}

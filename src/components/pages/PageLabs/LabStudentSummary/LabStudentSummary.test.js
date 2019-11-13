@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import LabStudentSummary from './LabStudentSummary';
 import api from '../../../../api/api';
 
@@ -15,19 +15,20 @@ describe('LabStudentSummary component', () => {
     // eslint-disable-next-line no-undef
     jest.spyOn(api, 'getStudentByMid').mockImplementation(() =>
       Promise.resolve({
-        json: () => {
-          return {
-            name: 'XX',
-            email: '000@gmail.com',
-            sessions: [
-              {
-                sid: 1,
-                attendance: 'A',
-                remark: ''
-              }
-            ]
-          };
-        }
+        name: 'XX',
+        email: '000@gmail.com',
+        sessions: [
+          {
+            sid: 1,
+            attendance: 'A',
+            remark: ''
+          },
+          {
+            sid: 2,
+            attendance: 'AB',
+            remark: 'MC'
+          }
+        ]
       })
     );
 
