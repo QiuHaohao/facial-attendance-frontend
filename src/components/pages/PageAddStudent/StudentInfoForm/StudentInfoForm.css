@@ -1,0 +1,13 @@
+.student-info-form-container {
+  display: flex;
+  justify-content: center;
+}
+.student-info-form {
+  min-width: 20vw;
+  max-width: 300px;
+  margin: 16px;
+  flex: 1;
+}
+.student-info-form-button {
+  width: 100%;
+}

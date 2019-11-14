@@ -28,6 +28,14 @@ function startSession(lid) {
   });
 }
 
+function endSession(sid) {
+  console.log(sid);
+  console.log(config.urlBase + config.pathEndSession);
+  return axios.post(config.urlBase + config.pathEndSession, {
+    sid
+  });
+}
+
 function getToken(username, password) {
   return axios.post(`${config.urlBase + config.pathAuthToken}`, {
     username,
@@ -52,6 +60,14 @@ function timeInMin(dt) {
     .split(':');
   return `${min[0]}:${min[1]}`;
 }
+
+function timeRecover(time) {
+  const min = time.split(':');
+  const hour = (Number(min[0]) + 8) % 24;
+  const hourStr = hour < 10 ? `0${hour}` : hour;
+  return `${hourStr}:${min[1]}`;
+}
+
 function getSessionsByLid(lid) {
   return axios
     .get(`${config.urlBase + config.pathSessions}?lab=${lid}`)
@@ -70,7 +86,7 @@ function getSessionBySid(sid) {
   return axios.get(`${config.urlBase + config.pathSession + sid}`).then(s => {
     return {
       sid: s.data.sid,
-      time: timeInMin(s.data.time),
+      time: timeRecover(timeInMin(s.data.time)),
       date: date(s.data.time),
       students: s.data.students
     };
@@ -102,6 +118,10 @@ function saveStudentChangesByMid(sessions, mid) {
   });
 }
 
+function addNewStudent(student) {
+  return axios.post(`${config.urlBase + config.pathStudents}`, student);
+}
+
 export default {
   postBase64Image,
   getToken,
@@ -109,8 +129,10 @@ export default {
   getSessionsByLid,
   verifyToken,
   startSession,
+  endSession,
   getSessionBySid,
   getStudentByMid,
   saveStudentChangesBySid,
-  saveStudentChangesByMid
+  saveStudentChangesByMid,
+  addNewStudent
 };

@@ -10,6 +10,7 @@ import ConditionalRedirectRoute from '../../commons/ConditionalRedirectRoute';
 import PageSession from '../../pages/PageSession';
 import PageLabs from '../../pages/PageLabs';
 import PageSignIn from '../../pages/PageSignIn';
+import PageAddStudent from '../../pages/PageAddStudent/PageAddStudent';
 
 function Content(props) {
   const user = useUser();
@@ -48,6 +49,7 @@ function Content(props) {
     <React.Fragment>
       <Route path="/session" component={PageSession} />
       <Route path="/labs/:id" component={PageLabs} />
+      <Route path="/student" component={PageAddStudent} />
       <Route exact path="/" component={PageSession} />
     </React.Fragment>
   );

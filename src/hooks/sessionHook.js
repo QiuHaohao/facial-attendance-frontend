@@ -66,6 +66,9 @@ function useProvideSession() {
   };
 
   const endSession = () => {
+    api
+      .endSession(sid)
+      .then(res => console.log('Res', res), res => console.log('Rej', res));
     setIsOnGoing(false);
     setSid(null);
     setLab(null);

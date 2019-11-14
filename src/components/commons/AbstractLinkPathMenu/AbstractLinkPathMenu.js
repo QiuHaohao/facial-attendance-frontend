@@ -23,7 +23,7 @@ function AbstractLinkPathMenu(props) {
       selectedKeys={selectedKeys}
     >
       {items.map((item, index) => {
-        if (item.displayName === 'Lab Groups') {
+        if (item.displayName === 'Reports') {
           return (
             <SubMenu key={String(index)} title={item.displayName}>
               {user.labs.map(lab => (

@@ -1,7 +1,7 @@
 {
   "urlBase": "http://172.21.148.166:8000",
   "pathSession": "/api/session/",
-  "pathSessions":"/api/sessions/",
+  "pathSessions": "/api/sessions/",
   "pathImage": "/session/image/",
   "pathLab": "/api/labs/",
   "pathStudents": "/api/students/",
@@ -9,5 +9,6 @@
   "pathAttendanceSession": "/api/attendance/session",
   "pathAttendanceStudent": "/api/attendance/student",
   "pathAuthToken": "/auth/token/",
-  "pathAuthVerify": "/auth/verify/"
+  "pathAuthVerify": "/auth/verify/",
+  "pathEndSession": "/session/end/"
 }

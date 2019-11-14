@@ -1,47 +1,52 @@
-.lab-container{
-    width: 80%;
-    margin: 50px auto; 
+.ant-table-wrapper {
+  border: 1px #ddd solid;
+  border-radius: 4px;
 }
 
-.lab-name{
-    margin: 20px 0 50px 0;
-    text-align:center;
+.lab-container {
+  width: 80%;
+  margin: 50px auto;
 }
 
-.lab-entry-container{
-    margin:40px auto;
-}
-.lab-entry-display-header{
-    font-size:20px;
-    width:300px;
-    height:40px;
-    margin: 10px 20px;
-    text-align:center;
+.lab-name {
+  margin: 20px 0 50px 0;
+  text-align: center;
 }
 
-.lab-entry-display-content{    
-    width:300px;
-    height:40px;
-    margin:10px 20px;
-    text-align:center;
+.lab-entry-container {
+  margin: 40px auto;
+}
+.lab-entry-display-header {
+  font-size: 20px;
+  width: 300px;
+  height: 40px;
+  margin: 10px 20px;
+  text-align: center;
 }
 
-.lab-save-button{
-    display:block;
-    margin:20px auto;
-    width:100px;
-    font-size:20px;
-    height:50px;
+.lab-entry-display-content {
+  width: 300px;
+  height: 40px;
+  margin: 10px 20px;
+  text-align: center;
 }
 
-.standard-table{
-    background-color:#fff;
+.lab-save-button {
+  display: block;
+  margin: 20px auto;
+  width: 100px;
+  font-size: 20px;
+  height: 50px;
 }
 
-.loading-table{
-    height: 385px;
-    width: 100%;
-    text-align: center;
-    line-height: 385px;
-    font-size: 50px
+.standard-table {
+  background-color: #fff;
+}
+
+.loading-table {
+  height: 385px;
+  width: 100%;
+  text-align: center;
+  line-height: 385px;
+  font-size: 50px;
 }
