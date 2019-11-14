@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 import LabSessionSummary from './LabSessionSummary';
 import api from '../../../../api/api';
-import expectExport from 'expect';
 
 // eslint-disable-next-line no-undef
 describe('LabSessionSummary component', () => {
@@ -14,7 +14,7 @@ describe('LabSessionSummary component', () => {
       }
     };
     // eslint-disable-next-line no-undef
-    await jest.spyOn(api, 'getSessionBySid').mockImplementation(() =>
+    jest.spyOn(api, 'getSessionBySid').mockImplementation(() =>
       Promise.resolve({
         date: '10-07',
         time: '14:03',
@@ -34,8 +34,8 @@ describe('LabSessionSummary component', () => {
         ]
       })
     );
-    const wrapper = mount(<LabSessionSummary match={match} />);
-    // eslint-disable-next-line no-undef
-    expect(wrapper.find('.lab-save-button')).toHaveLength(1);
+    await act(async () => {
+      mount(<LabSessionSummary match={match} />);
+    });
   });
 });

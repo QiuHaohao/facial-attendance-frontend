@@ -1,12 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 import LabStudentSummary from './LabStudentSummary';
 import api from '../../../../api/api';
 
 // eslint-disable-next-line no-undef
 describe('LabStudentSummary component', () => {
   // eslint-disable-next-line no-undef
-  test('renders without crashing', () => {
+  test('renders without crashing', async () => {
     const match = {
       params: {
         id: 'U17872837D'
@@ -32,7 +33,9 @@ describe('LabStudentSummary component', () => {
       })
     );
 
-    mount(<LabStudentSummary match={match} />);
+    await act(async () => {
+      mount(<LabStudentSummary match={match} />);
+    });
   });
 
   // // eslint-disable-next-line no-undef
