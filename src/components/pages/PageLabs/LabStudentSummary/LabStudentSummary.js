@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Select, Input, Button, message } from 'antd';
 import api from '../../../../api/api';
+import InputChangeHandler from '../InputChangeHandler/InputChangeHandler';
 
 import EntryInfoDisplayer from '../EntryInfoDisplayer/EntryInfoDisplayer';
 
@@ -23,25 +24,11 @@ function LabStudentSummary(props) {
     });
   }, [matricNO]);
   const changeAttendance = (record, e) => {
-    const tempsessions = sessions;
-    for (let i = 0; i < tempsessions.length; i += 1) {
-      if (tempsessions[i].sid === record.sid) {
-        tempsessions[i].attendance = e;
-        break;
-      }
-    }
-    setSessions(tempsessions);
+    setSessions(InputChangeHandler.seAttHandler(record, e, sessions));
   };
 
   const changeRemark = (record, e) => {
-    const tempsessions = sessions;
-    for (let i = 0; i < tempsessions.length; i += 1) {
-      if (tempsessions[i].sid === record.sid) {
-        tempsessions[i].remark = e;
-        break;
-      }
-    }
-    setSessions(tempsessions);
+    setSessions(InputChangeHandler.seReHandler(record, e, sessions));
   };
 
   const saveChanges = () => {

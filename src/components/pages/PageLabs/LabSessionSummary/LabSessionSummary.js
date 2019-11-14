@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Table, Select, Input, Button, message } from 'antd';
 import React, { useState, useEffect } from 'react';
 import api from '../../../../api/api';
+import InputChangeHandler from '../InputChangeHandler/InputChangeHandler';
 import EntryInfoDisplayer from '../EntryInfoDisplayer/EntryInfoDisplayer';
 
 function LabSessionSummary(props) {
@@ -22,25 +23,11 @@ function LabSessionSummary(props) {
     });
   }, [sessionID]);
   const changeAttendance = (record, e) => {
-    const tempstudentsA = students;
-    for (let i = 0; i < tempstudentsA.length; i += 1) {
-      if (tempstudentsA[i].mid === record.mid) {
-        tempstudentsA[i].attendance = e;
-        break;
-      }
-    }
-    setStudents(tempstudentsA);
+    setStudents(InputChangeHandler.stAttHandler(record, e, students));
   };
 
   const changeRemark = (record, e) => {
-    const tempstudentsR = students;
-    for (let i = 0; i < tempstudentsR.length; i += 1) {
-      if (tempstudentsR[i].mid === record.mid) {
-        tempstudentsR[i].remark = e;
-        break;
-      }
-    }
-    setStudents(tempstudentsR);
+    setStudents(InputChangeHandler.stReHandler(record, e, students));
   };
 
   const saveChanges = () => {
