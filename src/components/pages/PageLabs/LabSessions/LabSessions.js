@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import { Table } from 'antd';
 import api from '../../../../api/api';
 import LabNameHolder from '../LabNameHolder/LabNameHolder';
@@ -48,7 +47,7 @@ function LabSessions(props) {
   };
   return (
     <div>
-      <LabNameHolder lname={lname} />
+      <LabNameHolder lname={lname === undefined ? 'CZ3007' : lname} />
       {sessions == null ? (
         <div className="loading-table">Loading...</div>
       ) : (
@@ -75,4 +74,4 @@ LabSessions.propTypes = {
   location: PropTypes.object.isRequired
 };
 
-export default withRouter(LabSessions);
+export default LabSessions;

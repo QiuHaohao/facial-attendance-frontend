@@ -15,7 +15,10 @@ function PageLabs(props) {
   const defaultPath = `/labs/${labId}/`;
   return (
     <div>
-      <LabNav id={labId} curPath={curPath} />
+      <LabNav
+        id={labId === undefined ? '1_CZ3002-TS4' : labId}
+        curPath={curPath}
+      />
       <div className="lab-container">
         <Switch>
           <Route
