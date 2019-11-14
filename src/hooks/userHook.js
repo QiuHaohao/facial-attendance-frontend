@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import PropTypes from 'prop-types';
 import React, { useState, useContext, createContext, useEffect } from 'react';
 import axios from 'axios';

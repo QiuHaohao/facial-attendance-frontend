@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useState, useContext, createContext, useEffect } from 'react';

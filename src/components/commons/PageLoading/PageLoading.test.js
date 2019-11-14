@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import App from './App';
+import PageLoading from './PageLoading';
 
 // eslint-disable-next-line no-undef
-describe('App component', () => {
+describe('PageLoading component', () => {
   // eslint-disable-next-line no-undef
   test('renders without crashing', () => {
-    mount(<App />);
+    mount(<PageLoading />);
   });
 });

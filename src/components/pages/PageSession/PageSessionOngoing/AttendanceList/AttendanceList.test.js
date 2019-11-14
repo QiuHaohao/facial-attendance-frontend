@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import App from './App';
+import AttendanceList from './AttendanceList';
 
 // eslint-disable-next-line no-undef
-describe('App component', () => {
+describe('AttendanceList component', () => {
   // eslint-disable-next-line no-undef
   test('renders without crashing', () => {
-    mount(<App />);
+    mount(<AttendanceList />);
   });
 });

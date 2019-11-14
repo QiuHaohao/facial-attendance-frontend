@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import axios from 'axios';
 
 const config = require('./config.json');
@@ -59,6 +60,14 @@ function timeInMin(dt) {
     .split(':');
   return `${min[0]}:${min[1]}`;
 }
+
+function timeRecover(time) {
+  const min = time.split(':');
+  const hour = (Number(min[0]) + 8) % 24;
+  const hourStr = hour < 10 ? `0${hour}` : hour;
+  return `${hourStr}:${min[1]}`;
+}
+
 function getSessionsByLid(lid) {
   return axios
     .get(`${config.urlBase + config.pathSessions}?lab=${lid}`)
@@ -77,7 +86,7 @@ function getSessionBySid(sid) {
   return axios.get(`${config.urlBase + config.pathSession + sid}`).then(s => {
     return {
       sid: s.data.sid,
-      time: timeInMin(s.data.time),
+      time: timeRecover(timeInMin(s.data.time)),
       date: date(s.data.time),
       students: s.data.students
     };
